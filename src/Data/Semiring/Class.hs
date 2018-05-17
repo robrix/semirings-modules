@@ -1,5 +1,8 @@
 module Data.Semiring.Class where
 
+-- | The identity element of some 'Monoid' @m@.
+--
+--   If @m@ is additionally a 'Semiring', this is its additive identity.
 zero :: Monoid m => m
 zero = mempty
 
