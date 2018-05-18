@@ -1,5 +1,11 @@
 -- | 'Semiring's, with and without multiplicative identities.
-module Data.Semiring.Class where
+module Data.Semiring.Class
+(
+-- * Semirings
+  Semiring(..)
+, Unital(..)
+, zero
+) where
 
 -- | A 'Semiring' @r@ is an abstract algebraic structure consisting of a commutative 'Semigroup' and an associative operator '><', with the additional constraints that '><' distributes over '<>'. Additionally, if @s@ is a 'Monoid', 'zero' is the absorping element of '><'.
 --
