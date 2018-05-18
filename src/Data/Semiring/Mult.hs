@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveFoldable, DeriveFunctor, DeriveTraversable, GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DeriveFoldable, DeriveFunctor, DeriveTraversable, GeneralizedNewtypeDeriving, ScopedTypeVariables #-}
 module Data.Semiring.Mult where
 
 import Control.Applicative (Applicative(..))
 import Control.Monad.Fix (MonadFix(..))
 import Data.Coerce (coerce)
 import Data.Function (fix)
+import Data.Semiring.Class
 
 newtype Mult r = Mult { getMult :: r }
   deriving (Enum, Eq, Foldable, Functor, Num, Ord, Read, Show, Traversable)
@@ -22,3 +23,6 @@ instance Monad Mult where
 
 instance MonadFix Mult where
   mfix f = fix (f . getMult)
+
+instance Semiring r => Semigroup (Mult r) where
+  (<>) = coerce ((><) :: r -> r -> r)
