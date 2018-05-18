@@ -1,5 +1,9 @@
 {-# LANGUAGE DeriveDataTypeable, DeriveGeneric #-}
-module Data.Semiring.Tropical where
+module Data.Semiring.Tropical
+(
+-- * Tropical 'Semiring's
+  Tropical(..)
+) where
 
 import Control.Applicative (Applicative(..))
 import Data.Data (Data(..))
@@ -51,7 +55,7 @@ instance Monad Tropical where
   Infinity >>= _ = Infinity
 
 
--- | The tropical semigroup is defined by taking '<>' = 'min'.
+-- | The tropical semigroup is defined by taking '<>' = 'min'. It is an idempotent 'Semigroup'.
 --
 -- Associativity of '<>':
 --
@@ -73,8 +77,7 @@ instance Ord r => Semigroup (Tropical r) where
 instance Ord r => Monoid (Tropical r) where
   mempty = Infinity
 
--- | The tropical semiring is defined by taking '<>' = 'min' and '><' = '<>'.
---
+-- $
 -- Commutativity of '<>':
 --
 -- prop> a >< b = b >< (a :: Tropical (Set Char))
