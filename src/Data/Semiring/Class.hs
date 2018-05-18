@@ -139,6 +139,10 @@ instance Unital () where
 instance Semiring r => Semiring (Dual r) where
   Dual a >< Dual b = Dual (b >< a)
 
+-- $
+-- Identity of '><':
+-- prop> one >< a = (a :: Dual (Arith Integer))
+-- prop> a >< one = (a :: Dual (Arith Integer))
 instance Unital r => Unital (Dual r) where
   one = Dual one
 
@@ -173,4 +177,6 @@ instance Ord a => Semiring (Set.Set a) where
 
 
 -- $setup
--- >>> import Test.QuickCheck ()
+-- >>> import Test.QuickCheck (Arbitrary(..))
+-- >>> import Data.Semiring.Arith
+-- >>> instance Arbitrary r => Arbitrary (Arith r) where arbitrary = Arith <$> arbitrary ; shrink (Arith r) = map Arith (shrink r)
