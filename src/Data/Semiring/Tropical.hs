@@ -18,12 +18,9 @@ data Tropical r = Finite r | Infinity
   deriving (Data, Eq, Generic, Generic1, Ord, Read, Show)
 
 instance Real r => Num (Tropical r) where
-  Finite a + Finite b = Finite (a `min` b)
-  a        + Infinity = a
-  Infinity + b        = b
+  (+) = min
   Finite a * Finite b = Finite (a + b)
-  Infinity * _        = Infinity
-  _        * Infinity = Infinity
+  _        * _        = Infinity
   negate (Finite a) = Finite (negate a)
   negate Infinity   = Infinity
   abs    (Finite a) = Finite (abs    a)
