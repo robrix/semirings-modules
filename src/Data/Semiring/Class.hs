@@ -1,3 +1,4 @@
+-- | 'Semiring's, with and without multiplicative identities.
 module Data.Semiring.Class where
 
 -- | The identity element of some 'Monoid' @m@.
