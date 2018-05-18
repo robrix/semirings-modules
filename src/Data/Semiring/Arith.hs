@@ -61,6 +61,9 @@ instance MonadFix Arith where
   mfix f = fix (f . getArith)
 
 
+-- $
+-- Associativity of '<>':
+-- prop> \ a b c -> a <> (b <> c) == (a <> b) <> (c :: Arith Integer)
 instance Num r => Semigroup (Arith r) where
   Arith a <> Arith b = Arith (a + b)
 
@@ -72,3 +75,8 @@ instance Num r => Semiring (Arith r) where
 
 instance Num r => Unital (Arith r) where
   one = 1
+
+
+-- $setup
+-- >>> import Test.QuickCheck (Arbitrary(..))
+-- >>> instance Arbitrary r => Arbitrary (Arith r) where arbitrary = Arith <$> arbitrary ; shrink (Arith r) = map Arith (shrink r)
