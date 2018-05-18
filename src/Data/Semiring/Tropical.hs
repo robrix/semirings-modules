@@ -48,3 +48,9 @@ instance Monad Tropical where
   (>>) = (*>)
   Finite a >>= f = f a
   Infinity >>= _ = Infinity
+
+
+instance Ord r => Semigroup (Tropical r) where
+  Finite a <> Finite b = Finite (a `min` b)
+  Infinity <> b        = b
+  a        <> Infinity = a
