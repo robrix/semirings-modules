@@ -1,7 +1,9 @@
 {-# LANGUAGE DeriveDataTypeable, DeriveFoldable, DeriveGeneric, DeriveTraversable, GeneralizedNewtypeDeriving, ScopedTypeVariables #-}
 -- | The 'Semigroup' from '><' & 'Monoid' with 'one'.
 module Data.Semiring.Mult
-( Mult(..)
+(
+-- * Multiplicative 'Semigroup's
+  Mult(..)
 ) where
 
 import Control.Applicative (Applicative(..))
