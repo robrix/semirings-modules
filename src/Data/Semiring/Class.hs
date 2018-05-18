@@ -53,6 +53,30 @@ class Semigroup r => Semiring r where
   infixr 7 ><
   (><) :: r -> r -> r
 
+-- $
+-- Associativity of '<>':
+-- prop> \ a b c -> a <> (b <> c) == (a <> b) <> (c :: ())
+--
+-- Identity of '<>':
+-- prop> \ a -> zero <> a == (a :: ())
+-- prop> \ a -> a <> zero == (a :: ())
+--
+-- Commutativity of '<>':
+-- prop> \ a b -> a >< b = b >< (a :: ())
+--
+-- Associativity of '><':
+-- prop> \ a b c -> a >< (b >< c) == (a >< b) >< (c :: ())
+--
+-- Distributivity of '><' over '<>':
+-- prop> \ a b c -> a >< (b <> c) = (a >< b) <> (a >< c :: ())
+-- prop> \ a b c -> (a <> b) >< c = (a >< c) <> (b >< c :: ())
+--
+-- Absorption of '><' by 'zero':
+-- prop> \ a -> a >< zero == (zero :: ())
+-- prop> \ a -> zero >< a == (zero :: ())
+instance Semiring () where
+  (><) = (<>)
+
 
 -- | The identity element of some 'Monoid' @m@.
 --
@@ -73,3 +97,7 @@ zero = mempty
 -- @
 class Semiring r => Unital r where
   one :: r
+
+
+-- $setup
+-- >>> import Test.QuickCheck ()
