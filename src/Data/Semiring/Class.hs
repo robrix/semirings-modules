@@ -115,6 +115,27 @@ instance Unital () where
 
 -- Semigroup
 
+-- $
+-- Associativity of '<>':
+-- prop> a <> (b <> c) == (a <> b) <> (c :: Dual (Set Char))
+--
+-- Identity of '<>':
+-- prop> zero <> a == (a :: Dual (Set Char))
+-- prop> a <> zero == (a :: Dual (Set Char))
+--
+-- Commutativity of '<>':
+-- prop> a >< b = b >< (a :: Dual (Set Char))
+--
+-- Associativity of '><':
+-- prop> a >< (b >< c) == (a >< b) >< (c :: Dual (Set Char))
+--
+-- Distributivity of '><' over '<>':
+-- prop> a >< (b <> c) = (a >< b) <> (a >< c :: Dual (Set Char))
+-- prop> (a <> b) >< c = (a >< c) <> (b >< c :: Dual (Set Char))
+--
+-- Absorption of '><' by 'zero':
+-- prop> a >< zero == (zero :: Dual (Set Char))
+-- prop> zero >< a == (zero :: Dual (Set Char))
 instance Semiring r => Semiring (Dual r) where
   Dual a >< Dual b = Dual (b >< a)
 
