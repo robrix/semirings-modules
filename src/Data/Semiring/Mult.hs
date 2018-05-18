@@ -60,8 +60,19 @@ instance Monad Mult where
 instance MonadFix Mult where
   mfix f = fix (f . getMult)
 
+
+-- $
+-- Associativity of '<>':
+-- prop> a <> (b <> c) == (a <> b) <> (c :: Mult (Arith Integer))
 instance Semiring r => Semigroup (Mult r) where
   Mult a <> Mult b = Mult (a >< b)
 
 instance Unital r => Monoid (Mult r) where
   mempty = Mult one
+
+
+-- $setup
+-- >>> import Test.QuickCheck (Arbitrary(..))
+-- >>> import Data.Semiring.Arith (Arith(..))
+-- >>> instance Arbitrary r => Arbitrary (Mult r) where arbitrary = Mult <$> arbitrary ; shrink (Mult r) = map Mult (shrink r)
+-- >>> instance Arbitrary r => Arbitrary (Arith r) where arbitrary = Arith <$> arbitrary ; shrink (Arith r) = map Arith (shrink r)
