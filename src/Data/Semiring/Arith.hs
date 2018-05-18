@@ -65,7 +65,7 @@ instance MonadFix Arith where
 -- Associativity of '<>':
 -- prop> \ a b c -> a <> (b <> c) == (a <> b) <> (c :: Arith Integer)
 instance Num r => Semigroup (Arith r) where
-  Arith a <> Arith b = Arith (a + b)
+  (<>) = (+)
 
 instance Num r => Monoid (Arith r) where
   mempty = 0
