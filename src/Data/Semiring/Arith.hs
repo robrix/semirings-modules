@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveDataTypeable, DeriveGeneric, ScopedTypeVariables #-}
+{-# LANGUAGE DeriveDataTypeable, DeriveGeneric #-}
 -- | The 'Semigroup' from 'Num'’s '+' and '*' operators, @0@, and @1@.
 module Data.Semiring.Arith
 (

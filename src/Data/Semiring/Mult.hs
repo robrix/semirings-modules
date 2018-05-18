@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveDataTypeable, DeriveGeneric, ScopedTypeVariables #-}
+{-# LANGUAGE DeriveDataTypeable, DeriveGeneric #-}
 -- | The 'Semigroup' from '><' & 'Monoid' with 'one'.
 module Data.Semiring.Mult
 (
