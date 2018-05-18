@@ -1,4 +1,4 @@
 packages: semirings-modules.cabal
 jobs: $ncpus
-package effects-sequences
+package semirings-modules
   ghc-options: -Weverything -Wno-missing-local-signatures -Wno-missing-import-lists -Wno-missing-export-lists -Wno-implicit-prelude -Wno-safe -Wno-unsafe -Wno-name-shadowing -Werror
