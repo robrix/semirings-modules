@@ -58,10 +58,15 @@ instance Ord r => Semigroup (Tropical r) where
   Infinity <> b        = b
   a        <> Infinity = a
 
+-- $
+-- Identity of '<>':
+-- prop> zero <> a == (a :: Tropical Integer)
+-- prop> a <> zero == (a :: Tropical Integer)
 instance Ord r => Monoid (Tropical r) where
   mempty = Infinity
 
 
 -- $setup
 -- >>> import Test.QuickCheck (Arbitrary(..))
+-- >>> import Data.Semiring.Class (zero)
 -- >>> instance Arbitrary r => Arbitrary (Tropical r) where arbitrary = Finite <$> arbitrary ; shrink (Finite r) = map Finite (shrink r) ; shrink Infinity = []
