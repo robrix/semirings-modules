@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable, DeriveGeneric #-}
 module Data.Semiring.Tropical where
 
+import Control.Applicative (Applicative(..))
 import Data.Data (Data(..))
 import GHC.Generics (Generic, Generic1)
 
@@ -33,3 +34,12 @@ instance Functor Tropical where
 instance Traversable Tropical where
   traverse f (Finite a) = Finite <$> f a
   traverse _ Infinity   = pure Infinity
+
+instance Applicative Tropical where
+  pure = Finite
+  a <* _ = a
+  _ *> a = a
+  Finite f <*> Finite a = Finite (f a)
+  _        <*> _        = Infinity
+  liftA2 f (Finite a) (Finite b) = Finite (f a b)
+  liftA2 _ _          _          = Infinity
