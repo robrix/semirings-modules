@@ -66,9 +66,7 @@ instance Monad Tropical where
 --
 -- prop> a <> a == (a :: Tropical Integer)
 instance Ord r => Semigroup (Tropical r) where
-  Finite a <> Finite b = Finite (a `min` b)
-  Infinity <> b        = b
-  a        <> Infinity = a
+  (<>) = min
 
 -- $
 -- Identity of '<>':
