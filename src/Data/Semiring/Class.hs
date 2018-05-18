@@ -8,6 +8,7 @@ module Data.Semiring.Class
 , Unital(..)
 ) where
 
+import Data.Semigroup as Semigroup
 import qualified Data.Set as Set
 
 -- | A 'Semiring' @r@ is an abstract algebraic structure consisting of a commutative 'Semigroup' and an associative operator '><', with the additional constraints that '><' distributes over '<>'. Additionally, if @s@ is a 'Monoid', 'zero' is the absorping element of '><'.
@@ -102,12 +103,20 @@ class Semiring r => Unital r where
   one :: r
 
 
+-- base
+
 -- $
 -- Identity of '><':
 -- prop> \ a -> one >< a = (a :: ())
 -- prop> \ a -> a >< one = (a :: ())
 instance Unital () where
   one = ()
+
+
+-- Semigroup
+
+instance Semiring r => Semiring (Dual r) where
+  Dual a >< Dual b = Dual (b >< a)
 
 
 -- containers
