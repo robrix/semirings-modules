@@ -84,6 +84,10 @@ instance (Ord r, Semigroup r) => Semiring (Tropical r) where
   Finite a >< Finite b = Finite (a <> b)
   _        >< _        = Infinity
 
+-- $
+-- Identity of '><':
+-- prop> one >< a = (a :: Tropical (Set Char))
+-- prop> a >< one = (a :: Tropical (Set Char))
 instance (Ord r, Semigroup r) => Unital (Tropical r) where
   one = Infinity
 
