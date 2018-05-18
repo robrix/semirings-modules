@@ -14,7 +14,8 @@ extra-source-files:  ChangeLog.md
 cabal-version:       >=1.10
 
 library
-  exposed-modules:     Data.Semiring.Class
+  exposed-modules:     Data.Semiring
+                     , Data.Semiring.Class
                      , Data.Semiring.Mult
   build-depends:       base >=4.11 && <4.12
   hs-source-dirs:      src
