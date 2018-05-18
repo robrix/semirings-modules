@@ -56,6 +56,10 @@ instance Monad Tropical where
 -- Associativity of '<>':
 --
 -- prop> a <> (b <> c) == (a <> b) <> (c :: Tropical Integer)
+--
+-- Idempotence of '<>':
+--
+-- prop> a <> a == (a :: Tropical Integer)
 instance Ord r => Semigroup (Tropical r) where
   Finite a <> Finite b = Finite (a `min` b)
   Infinity <> b        = b
