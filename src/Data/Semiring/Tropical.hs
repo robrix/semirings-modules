@@ -66,6 +66,20 @@ instance Ord r => Semigroup (Tropical r) where
 instance Ord r => Monoid (Tropical r) where
   mempty = Infinity
 
+-- $
+-- Commutativity of '<>':
+-- prop> a >< b = b >< (a :: Tropical (Set Char))
+--
+-- Associativity of '><':
+-- prop> a >< (b >< c) == (a >< b) >< (c :: Tropical (Set Char))
+--
+-- Distributivity of '><' over '<>':
+-- prop> a >< (b <> c) = (a >< b) <> (a >< c :: Tropical (Set Char))
+-- prop> (a <> b) >< c = (a >< c) <> (b >< c :: Tropical (Set Char))
+--
+-- Absorption of '><' by 'zero':
+-- prop> a >< zero == (zero :: Tropical (Set Char))
+-- prop> zero >< a == (zero :: Tropical (Set Char))
 instance (Ord r, Semigroup r) => Semiring (Tropical r) where
   Finite a >< Finite b = Finite (a <> b)
   _        >< _        = Infinity
@@ -74,4 +88,5 @@ instance (Ord r, Semigroup r) => Semiring (Tropical r) where
 -- $setup
 -- >>> import Test.QuickCheck (Arbitrary(..))
 -- >>> import Data.Semiring.Class (zero)
+-- >>> import Data.Set (Set)
 -- >>> instance Arbitrary r => Arbitrary (Tropical r) where arbitrary = Finite <$> arbitrary ; shrink (Finite r) = map Finite (shrink r) ; shrink Infinity = []
