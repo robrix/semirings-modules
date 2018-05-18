@@ -39,3 +39,7 @@ zero = mempty
 class Monoid r => Semiring r where
   infixr 7 ><
   (><) :: r -> r -> r
+
+
+class Semiring r => Unital r where
+  one :: r
