@@ -21,3 +21,7 @@ instance Real r => Num (Tropical r) where
   signum (Finite a) = Finite (signum a)
   signum Infinity   = 1
   fromInteger       = Finite . fromInteger
+
+instance Foldable Tropical where
+  foldMap f (Finite a) = f a
+  foldMap _ Infinity   = mempty
