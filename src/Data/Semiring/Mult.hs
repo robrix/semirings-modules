@@ -17,7 +17,17 @@ import GHC.Generics (Generic, Generic1)
 
 -- | The multiplicative 'Semigroup' of 'Semiring's, and multiplicative 'Monoid' of 'Unital' 'Semiring's.
 newtype Mult r = Mult { getMult :: r }
-  deriving (Bounded, Data, Enum, Eq, Generic, Generic1, Ix, Num, Ord, Read, Show)
+  deriving (Bounded, Data, Eq, Generic, Generic1, Ix, Num, Ord, Read, Show)
+
+instance Enum r => Enum (Mult r) where
+  succ = coerce
+  pred = coerce
+  toEnum = coerce (toEnum :: Int -> r)
+  fromEnum = coerce (fromEnum :: r -> Int)
+  enumFrom = coerce (enumFrom :: r -> [r])
+  enumFromThen = coerce (enumFromThen :: r -> r -> [r])
+  enumFromTo = coerce (enumFromTo :: r -> r -> [r])
+  enumFromThenTo = coerce (enumFromThenTo :: r -> r -> r -> [r])
 
 instance Foldable Mult where
   foldMap = coerce
