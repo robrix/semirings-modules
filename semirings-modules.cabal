@@ -18,6 +18,7 @@ library
                      , Data.Semiring.Arith
                      , Data.Semiring.Class
                      , Data.Semiring.Mult
+                     , Data.Semiring.Tropical
   build-depends:       base >=4.11 && <4.12
                      , containers
   hs-source-dirs:      src
