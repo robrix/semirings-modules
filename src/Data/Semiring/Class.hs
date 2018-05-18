@@ -19,8 +19,8 @@ zero = mempty
 --   Identity of '<>' (the 'Monoid' law, if @s@ is a 'Monoid'):
 --
 -- @
---   'zero' '<>' a = a
---   a '<>' 'zero' = a
+--   'zero' '<>' a    = a
+--   a    '<>' 'zero' = a
 -- @
 --
 --   Commutativity  of '<>':
@@ -45,8 +45,8 @@ zero = mempty
 --   Absorption of '><' by 'zero' (if @s@ is a 'Monoid'):
 --
 -- @
---   'zero' '><' a = 'zero'
---   a '><' 'zero' = 'zero'
+--   'zero' '><' a    = 'zero'
+--   a    '><' 'zero' = 'zero'
 -- @
 class Semigroup r => Semiring r where
   infixr 7 ><
@@ -59,7 +59,9 @@ class Semigroup r => Semiring r where
 --
 --   Identity of '><':
 --
---   > one >< a = a
---   > a >< one = a
+-- @
+--   'one' '><' a   = a
+--   a   '><' 'one' = a
+-- @
 class Semiring r => Unital r where
   one :: r
