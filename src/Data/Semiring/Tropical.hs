@@ -51,8 +51,10 @@ instance Monad Tropical where
   Infinity >>= _ = Infinity
 
 
--- $
+-- | The tropical semigroup is defined by taking '<>' = 'min'.
+--
 -- Associativity of '<>':
+--
 -- prop> a <> (b <> c) == (a <> b) <> (c :: Tropical Integer)
 instance Ord r => Semigroup (Tropical r) where
   Finite a <> Finite b = Finite (a `min` b)
@@ -61,23 +63,29 @@ instance Ord r => Semigroup (Tropical r) where
 
 -- $
 -- Identity of '<>':
+--
 -- prop> zero <> a == (a :: Tropical Integer)
 -- prop> a <> zero == (a :: Tropical Integer)
 instance Ord r => Monoid (Tropical r) where
   mempty = Infinity
 
--- $
+-- | The tropical semiring is defined by taking '<>' = 'min' and '><' = '<>'.
+--
 -- Commutativity of '<>':
+--
 -- prop> a >< b = b >< (a :: Tropical (Set Char))
 --
 -- Associativity of '><':
+--
 -- prop> a >< (b >< c) == (a >< b) >< (c :: Tropical (Set Char))
 --
 -- Distributivity of '><' over '<>':
+--
 -- prop> a >< (b <> c) = (a >< b) <> (a >< c :: Tropical (Set Char))
 -- prop> (a <> b) >< c = (a >< c) <> (b >< c :: Tropical (Set Char))
 --
 -- Absorption of '><' by 'zero':
+--
 -- prop> a >< zero == (zero :: Tropical (Set Char))
 -- prop> zero >< a == (zero :: Tropical (Set Char))
 instance (Ord r, Semigroup r) => Semiring (Tropical r) where
@@ -86,6 +94,7 @@ instance (Ord r, Semigroup r) => Semiring (Tropical r) where
 
 -- $
 -- Identity of '><':
+--
 -- prop> one >< a = (a :: Tropical (Set Char))
 -- prop> a >< one = (a :: Tropical (Set Char))
 instance (Ord r, Semigroup r) => Unital (Tropical r) where
