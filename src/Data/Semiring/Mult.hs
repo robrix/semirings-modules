@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveFoldable, DeriveFunctor, DeriveTraversable, GeneralizedNewtypeDeriving, ScopedTypeVariables #-}
+{-# LANGUAGE DeriveFoldable, DeriveFunctor, DeriveGeneric, DeriveTraversable, GeneralizedNewtypeDeriving, ScopedTypeVariables #-}
 module Data.Semiring.Mult where
 
 import Control.Applicative (Applicative(..))
@@ -6,10 +6,11 @@ import Control.Monad.Fix (MonadFix(..))
 import Data.Coerce (coerce)
 import Data.Function (fix)
 import Data.Semiring.Class
+import GHC.Generics
 
 -- | The multiplicative 'Semigroup' of 'Semiring's, and multiplicative 'Monoid' of 'Unital' 'Semiring's.
 newtype Mult r = Mult { getMult :: r }
-  deriving (Enum, Eq, Foldable, Functor, Num, Ord, Read, Show, Traversable)
+  deriving (Enum, Eq, Foldable, Functor, Generic, Generic1, Num, Ord, Read, Show, Traversable)
 
 instance Applicative Mult where
   pure = Mult
