@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveDataTypeable, DeriveGeneric, GeneralizedNewtypeDeriving, ScopedTypeVariables #-}
+{-# LANGUAGE DeriveDataTypeable, DeriveGeneric, ScopedTypeVariables #-}
 -- | The 'Semigroup' from '><' & 'Monoid' with 'one'.
 module Data.Semiring.Mult
 (
@@ -17,7 +17,7 @@ import GHC.Generics (Generic, Generic1)
 
 -- | The multiplicative 'Semigroup' of 'Semiring's, and multiplicative 'Monoid' of 'Unital' 'Semiring's.
 newtype Mult r = Mult { getMult :: r }
-  deriving (Bounded, Data, Eq, Generic, Generic1, Ix, Num, Ord, Read, Show)
+  deriving (Bounded, Data, Eq, Generic, Generic1, Ix, Ord, Read, Show)
 
 instance Enum r => Enum (Mult r) where
   succ = coerce
@@ -28,6 +28,15 @@ instance Enum r => Enum (Mult r) where
   enumFromThen = coerce (enumFromThen :: r -> r -> [r])
   enumFromTo = coerce (enumFromTo :: r -> r -> [r])
   enumFromThenTo = coerce (enumFromThenTo :: r -> r -> r -> [r])
+
+instance Num r => Num (Mult r) where
+  (+) = coerce ((+) :: r -> r -> r)
+  (*) = coerce ((*) :: r -> r -> r)
+  (-) = coerce ((-) :: r -> r -> r)
+  negate = coerce (negate :: r -> r)
+  abs    = coerce (abs    :: r -> r)
+  signum = coerce (signum :: r -> r)
+  fromInteger = coerce (fromInteger :: Integer -> r)
 
 instance Foldable Mult where
   foldMap = coerce
