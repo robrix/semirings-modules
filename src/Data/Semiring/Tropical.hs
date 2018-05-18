@@ -8,6 +8,7 @@ module Data.Semiring.Tropical
 
 import Control.Applicative (Applicative(..))
 import Data.Data (Data(..))
+import Data.Semigroup (Semigroup(..), stimesIdempotentMonoid)
 import Data.Semiring.Class (Semiring(..), Unital(..))
 import GHC.Generics (Generic, Generic1)
 
@@ -67,6 +68,7 @@ instance Monad Tropical where
 -- prop> a <> a == (a :: Tropical Integer)
 instance Ord r => Semigroup (Tropical r) where
   (<>) = min
+  stimes = stimesIdempotentMonoid
 
 -- $
 -- Identity of '<>':
