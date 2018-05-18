@@ -11,7 +11,10 @@ import Data.Data (Data(..))
 import Data.Semiring.Class (Semiring(..), Unital(..))
 import GHC.Generics (Generic, Generic1)
 
-data Tropical n = Finite n | Infinity
+-- | Tropical semirings.
+--
+--   Note that the 'Semiring', and 'Unital' instances are defined in terms of a 'Semigroup' instance for @r@, allowing it to be used with types that don’t have 'Num' instances.
+data Tropical r = Finite r | Infinity
   deriving (Data, Eq, Generic, Generic1, Ord, Read, Show)
 
 instance Real r => Num (Tropical r) where
