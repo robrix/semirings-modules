@@ -22,6 +22,20 @@ zero = mempty
 --   Commutativity  of '<>':
 --
 --   > a <> b = b <> a
+--
+--   Associativity of '><':
+--
+--   > a >< (b >< c) = (a >< b) >< c
+--
+--   Distributivity of '><' over '<>':
+--
+--   > a >< (b <> c) = (a >< b) <> (a >< c)
+--   > (a <> b) >< c = (a >< c) <> (b >< c)
+--
+--   Absorption of '><' into 'zero':
+--
+--   > zero >< a = zero
+--   > a >< zero = zero
 class Monoid r => Semiring r where
   infixr 7 ><
   (><) :: r -> r -> r
