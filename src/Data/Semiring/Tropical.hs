@@ -58,6 +58,9 @@ instance Ord r => Semigroup (Tropical r) where
   Infinity <> b        = b
   a        <> Infinity = a
 
+instance Ord r => Monoid (Tropical r) where
+  mempty = Infinity
+
 
 -- $setup
 -- >>> import Test.QuickCheck (Arbitrary(..))
