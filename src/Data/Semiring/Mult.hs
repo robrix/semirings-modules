@@ -1,9 +1,15 @@
 {-# LANGUAGE DeriveFoldable, DeriveFunctor, DeriveTraversable, GeneralizedNewtypeDeriving #-}
 module Data.Semiring.Mult where
 
+import Control.Applicative
+import Data.Coerce
+
 newtype Mult r = Mult { getMult :: r }
   deriving (Enum, Eq, Foldable, Functor, Num, Ord, Read, Show, Traversable)
 
 instance Applicative Mult where
   pure = Mult
-  Mult f <*> Mult a = Mult (f a)
+  a <* _ = a
+  _ *> a = a
+  (<*>) = coerce
+  liftA2 = coerce
