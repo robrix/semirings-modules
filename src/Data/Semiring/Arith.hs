@@ -2,7 +2,7 @@
 -- | The 'Semigroup' from 'Num'’s '+' and '*' operators, @0@, and @1@.
 module Data.Semiring.Arith
 (
--- * Multiplicative 'Semigroup's
+-- * Numeric 'Semigroup's
   Arith(..)
 ) where
 
