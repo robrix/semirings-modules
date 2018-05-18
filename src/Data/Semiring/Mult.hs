@@ -7,6 +7,7 @@ import Data.Coerce (coerce)
 import Data.Function (fix)
 import Data.Semiring.Class
 
+-- | The multiplicative 'Semigroup' of 'Semiring's, and multiplicative 'Monoid' of 'Unital' 'Semiring's.
 newtype Mult r = Mult { getMult :: r }
   deriving (Enum, Eq, Foldable, Functor, Num, Ord, Read, Show, Traversable)
 
