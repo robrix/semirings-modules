@@ -118,6 +118,9 @@ instance Unital () where
 instance Semiring r => Semiring (Dual r) where
   Dual a >< Dual b = Dual (b >< a)
 
+instance Unital r => Unital (Dual r) where
+  one = Dual one
+
 
 -- containers
 
