@@ -50,7 +50,15 @@ instance Monad Tropical where
   Infinity >>= _ = Infinity
 
 
+-- $
+-- Associativity of '<>':
+-- prop> a <> (b <> c) == (a <> b) <> (c :: Tropical Integer)
 instance Ord r => Semigroup (Tropical r) where
   Finite a <> Finite b = Finite (a `min` b)
   Infinity <> b        = b
   a        <> Infinity = a
+
+
+-- $setup
+-- >>> import Test.QuickCheck (Arbitrary(..))
+-- >>> instance Arbitrary r => Arbitrary (Tropical r) where arbitrary = Finite <$> arbitrary ; shrink (Finite r) = map Finite (shrink r) ; shrink Infinity = []
