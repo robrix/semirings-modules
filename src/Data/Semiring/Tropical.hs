@@ -25,3 +25,7 @@ instance Real r => Num (Tropical r) where
 instance Foldable Tropical where
   foldMap f (Finite a) = f a
   foldMap _ Infinity   = mempty
+
+instance Functor Tropical where
+  fmap f (Finite a) = Finite (f a)
+  fmap _ Infinity   = Infinity
