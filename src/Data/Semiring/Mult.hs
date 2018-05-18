@@ -13,3 +13,7 @@ instance Applicative Mult where
   _ *> a = a
   (<*>) = coerce
   liftA2 = coerce
+
+instance Monad Mult where
+  (>>) = (*>)
+  Mult a >>= f = f a
