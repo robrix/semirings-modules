@@ -58,3 +58,7 @@ instance Monad Arith where
 
 instance MonadFix Arith where
   mfix f = fix (f . getArith)
+
+
+instance Num r => Semigroup (Arith r) where
+  Arith a <> Arith b = Arith (a + b)
