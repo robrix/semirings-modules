@@ -6,7 +6,7 @@ module Data.Semiring.Class where
 zero :: Monoid m => m
 zero = mempty
 
--- | A 'Semiring' is an abstract algebraic structure consisting of a commutative 'Monoid' and an associative operator '(><)', with the additional constraints that '(><)' distributes over '(<>)' and that 'zero' is the annihilator for '(><)'.
+-- | A 'Semiring' @r@ is an abstract algebraic structure consisting of a commutative 'Semigroup' and an associative operator '(><)', with the additional constraints that '(><)' distributes over '(<>)'. Additionally, if @s@ is a 'Monoid', 'zero' is the absorping element of '(><)'.
 --
 --   Laws:
 --
@@ -14,7 +14,7 @@ zero = mempty
 --
 --   > a <> (b <> c) = (a <> b) <> c
 --
---   Identity of '<>' (the 'Monoid' law):
+--   Identity of '<>' (the 'Monoid' law, if @s@ is a 'Monoid'):
 --
 --   > zero <> a = a
 --   > a <> zero = a
@@ -32,11 +32,11 @@ zero = mempty
 --   > a >< (b <> c) = (a >< b) <> (a >< c)
 --   > (a <> b) >< c = (a >< c) <> (b >< c)
 --
---   Absorption of '><' into 'zero':
+--   Absorption of '><' by 'zero' (if @s@ is a 'Monoid'):
 --
 --   > zero >< a = zero
 --   > a >< zero = zero
-class Monoid r => Semiring r where
+class Semigroup r => Semiring r where
   infixr 7 ><
   (><) :: r -> r -> r
 
