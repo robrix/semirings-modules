@@ -7,7 +7,7 @@ import Data.Coerce (coerce)
 import Data.Function (fix)
 import Data.Ix (Ix(..))
 import Data.Semiring.Class
-import GHC.Generics
+import GHC.Generics (Generic, Generic1)
 
 -- | The multiplicative 'Semigroup' of 'Semiring's, and multiplicative 'Monoid' of 'Unital' 'Semiring's.
 newtype Mult r = Mult { getMult :: r }
