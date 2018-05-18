@@ -74,6 +74,20 @@ instance Num r => Semigroup (Arith r) where
 instance Num r => Monoid (Arith r) where
   mempty = 0
 
+-- $
+-- Commutativity of '<>':
+-- prop> \ a b -> a >< b = b >< (a :: Arith Integer)
+--
+-- Associativity of '><':
+-- prop> \ a b c -> a >< (b >< c) == (a >< b) >< (c :: Arith Integer)
+--
+-- Distributivity of '><' over '<>':
+-- prop> \ a b c -> a >< (b <> c) = (a >< b) <> (a >< c :: Arith Integer)
+-- prop> \ a b c -> (a <> b) >< c = (a >< c) <> (b >< c :: Arith Integer)
+--
+-- Absorption of '><' by 'zero':
+-- prop> \ a -> a >< zero == (zero :: Arith Integer)
+-- prop> \ a -> zero >< a == (zero :: Arith Integer)
 instance Num r => Semiring (Arith r) where
   (><) = (*)
 
