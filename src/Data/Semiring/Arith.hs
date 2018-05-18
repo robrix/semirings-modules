@@ -62,3 +62,6 @@ instance MonadFix Arith where
 
 instance Num r => Semigroup (Arith r) where
   Arith a <> Arith b = Arith (a + b)
+
+instance Num r => Monoid (Arith r) where
+  mempty = 0
