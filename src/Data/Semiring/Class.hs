@@ -116,6 +116,28 @@ instance Unital () where
 instance Ord a => Semiring (Set.Set a) where
   (><) = Set.intersection
 
+-- $
+-- Associativity of '<>':
+-- prop> \ a b c -> a <> (b <> c) == (a <> b) <> (c :: Set Char)
+--
+-- Identity of '<>':
+-- prop> \ a -> zero <> a == (a :: Set Char)
+-- prop> \ a -> a <> zero == (a :: Set Char)
+--
+-- Commutativity of '<>':
+-- prop> \ a b -> a >< b = b >< (a :: Set Char)
+--
+-- Associativity of '><':
+-- prop> \ a b c -> a >< (b >< c) == (a >< b) >< (c :: Set Char)
+--
+-- Distributivity of '><' over '<>':
+-- prop> \ a b c -> a >< (b <> c) = (a >< b) <> (a >< c :: Set Char)
+-- prop> \ a b c -> (a <> b) >< c = (a >< c) <> (b >< c :: Set Char)
+--
+-- Absorption of '><' by 'zero':
+-- prop> \ a -> a >< zero == (zero :: Set Char)
+-- prop> \ a -> zero >< a == (zero :: Set Char)
+
 
 -- $setup
 -- >>> import Test.QuickCheck ()
