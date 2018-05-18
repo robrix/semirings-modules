@@ -99,5 +99,13 @@ class Semiring r => Unital r where
   one :: r
 
 
+-- $
+-- Identity of '><':
+-- prop> \ a -> one >< a = (a :: ())
+-- prop> \ a -> a >< one = (a :: ())
+instance Unital () where
+  one = ()
+
+
 -- $setup
 -- >>> import Test.QuickCheck ()
