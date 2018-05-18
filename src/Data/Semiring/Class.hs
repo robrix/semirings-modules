@@ -112,6 +112,7 @@ instance Unital () where
 
 -- containers
 
+-- | Sets form a 'Semiring' under 'intersection'.
 instance Ord a => Semiring (Set.Set a) where
   (><) = Set.intersection
 
