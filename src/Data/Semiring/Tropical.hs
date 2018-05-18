@@ -3,6 +3,7 @@ module Data.Semiring.Tropical where
 
 import Control.Applicative (Applicative(..))
 import Data.Data (Data(..))
+import Data.Semiring.Class (Semiring(..))
 import GHC.Generics (Generic, Generic1)
 
 data Tropical n = Finite n | Infinity
@@ -64,6 +65,10 @@ instance Ord r => Semigroup (Tropical r) where
 -- prop> a <> zero == (a :: Tropical Integer)
 instance Ord r => Monoid (Tropical r) where
   mempty = Infinity
+
+instance (Ord r, Semigroup r) => Semiring (Tropical r) where
+  Finite a >< Finite b = Finite (a <> b)
+  _        >< _        = Infinity
 
 
 -- $setup
