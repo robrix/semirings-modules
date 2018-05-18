@@ -42,5 +42,12 @@ class Monoid r => Semiring r where
 
 
 -- | 'Unital' 'Semiring's additionally have a multiplicative identity, 'one'.
+--
+--   Laws:
+--
+--   Identity of '><':
+--
+--   > one >< a = a
+--   > a >< one = a
 class Semiring r => Unital r where
   one :: r
