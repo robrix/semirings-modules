@@ -59,25 +59,25 @@ class Semigroup r => Semiring r where
 
 -- $
 -- Associativity of '<>':
--- prop> \ a b c -> a <> (b <> c) == (a <> b) <> (c :: ())
+-- prop> a <> (b <> c) == (a <> b) <> (c :: ())
 --
 -- Identity of '<>':
--- prop> \ a -> zero <> a == (a :: ())
--- prop> \ a -> a <> zero == (a :: ())
+-- prop> zero <> a == (a :: ())
+-- prop> a <> zero == (a :: ())
 --
 -- Commutativity of '<>':
--- prop> \ a b -> a >< b = b >< (a :: ())
+-- prop> a >< b = b >< (a :: ())
 --
 -- Associativity of '><':
--- prop> \ a b c -> a >< (b >< c) == (a >< b) >< (c :: ())
+-- prop> a >< (b >< c) == (a >< b) >< (c :: ())
 --
 -- Distributivity of '><' over '<>':
--- prop> \ a b c -> a >< (b <> c) = (a >< b) <> (a >< c :: ())
--- prop> \ a b c -> (a <> b) >< c = (a >< c) <> (b >< c :: ())
+-- prop> a >< (b <> c) = (a >< b) <> (a >< c :: ())
+-- prop> (a <> b) >< c = (a >< c) <> (b >< c :: ())
 --
 -- Absorption of '><' by 'zero':
--- prop> \ a -> a >< zero == (zero :: ())
--- prop> \ a -> zero >< a == (zero :: ())
+-- prop> a >< zero == (zero :: ())
+-- prop> zero >< a == (zero :: ())
 instance Semiring () where
   (><) = (<>)
 
@@ -107,8 +107,8 @@ class Semiring r => Unital r where
 
 -- $
 -- Identity of '><':
--- prop> \ a -> one >< a = (a :: ())
--- prop> \ a -> a >< one = (a :: ())
+-- prop> one >< a = (a :: ())
+-- prop> a >< one = (a :: ())
 instance Unital () where
   one = ()
 
@@ -130,25 +130,25 @@ instance Ord a => Semiring (Set.Set a) where
 
 -- $
 -- Associativity of '<>':
--- prop> \ a b c -> a <> (b <> c) == (a <> b) <> (c :: Set Char)
+-- prop> a <> (b <> c) == (a <> b) <> (c :: Set Char)
 --
 -- Identity of '<>':
--- prop> \ a -> zero <> a == (a :: Set Char)
--- prop> \ a -> a <> zero == (a :: Set Char)
+-- prop> zero <> a == (a :: Set Char)
+-- prop> a <> zero == (a :: Set Char)
 --
 -- Commutativity of '<>':
--- prop> \ a b -> a >< b = b >< (a :: Set Char)
+-- prop> a >< b = b >< (a :: Set Char)
 --
 -- Associativity of '><':
--- prop> \ a b c -> a >< (b >< c) == (a >< b) >< (c :: Set Char)
+-- prop> a >< (b >< c) == (a >< b) >< (c :: Set Char)
 --
 -- Distributivity of '><' over '<>':
--- prop> \ a b c -> a >< (b <> c) = (a >< b) <> (a >< c :: Set Char)
--- prop> \ a b c -> (a <> b) >< c = (a >< c) <> (b >< c :: Set Char)
+-- prop> a >< (b <> c) = (a >< b) <> (a >< c :: Set Char)
+-- prop> (a <> b) >< c = (a >< c) <> (b >< c :: Set Char)
 --
 -- Absorption of '><' by 'zero':
--- prop> \ a -> a >< zero == (zero :: Set Char)
--- prop> \ a -> zero >< a == (zero :: Set Char)
+-- prop> a >< zero == (zero :: Set Char)
+-- prop> zero >< a == (zero :: Set Char)
 
 
 -- $setup

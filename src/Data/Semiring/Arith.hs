@@ -63,38 +63,38 @@ instance MonadFix Arith where
 
 -- $
 -- Associativity of '<>':
--- prop> \ a b c -> a <> (b <> c) == (a <> b) <> (c :: Arith Integer)
+-- prop> a <> (b <> c) == (a <> b) <> (c :: Arith Integer)
 instance Num r => Semigroup (Arith r) where
   (<>) = (+)
 
 -- $
 -- Identity of '<>':
--- prop> \ a -> zero <> a == (a :: Arith Integer)
--- prop> \ a -> a <> zero == (a :: Arith Integer)
+-- prop> zero <> a == (a :: Arith Integer)
+-- prop> a <> zero == (a :: Arith Integer)
 instance Num r => Monoid (Arith r) where
   mempty = 0
 
 -- $
 -- Commutativity of '<>':
--- prop> \ a b -> a >< b = b >< (a :: Arith Integer)
+-- prop> a >< b = b >< (a :: Arith Integer)
 --
 -- Associativity of '><':
--- prop> \ a b c -> a >< (b >< c) == (a >< b) >< (c :: Arith Integer)
+-- prop> a >< (b >< c) == (a >< b) >< (c :: Arith Integer)
 --
 -- Distributivity of '><' over '<>':
--- prop> \ a b c -> a >< (b <> c) = (a >< b) <> (a >< c :: Arith Integer)
--- prop> \ a b c -> (a <> b) >< c = (a >< c) <> (b >< c :: Arith Integer)
+-- prop> a >< (b <> c) = (a >< b) <> (a >< c :: Arith Integer)
+-- prop> (a <> b) >< c = (a >< c) <> (b >< c :: Arith Integer)
 --
 -- Absorption of '><' by 'zero':
--- prop> \ a -> a >< zero == (zero :: Arith Integer)
--- prop> \ a -> zero >< a == (zero :: Arith Integer)
+-- prop> a >< zero == (zero :: Arith Integer)
+-- prop> zero >< a == (zero :: Arith Integer)
 instance Num r => Semiring (Arith r) where
   (><) = (*)
 
 -- $
 -- Identity of '><':
--- prop> \ a -> one >< a = (a :: Arith Integer)
--- prop> \ a -> a >< one = (a :: Arith Integer)
+-- prop> one >< a = (a :: Arith Integer)
+-- prop> a >< one = (a :: Arith Integer)
 instance Num r => Unital (Arith r) where
   one = 1
 
