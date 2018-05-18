@@ -26,3 +26,6 @@ instance MonadFix Mult where
 
 instance Semiring r => Semigroup (Mult r) where
   (<>) = coerce ((><) :: r -> r -> r)
+
+instance Unital r => Monoid (Mult r) where
+  mempty = Mult one
