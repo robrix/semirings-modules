@@ -91,6 +91,10 @@ instance Num r => Monoid (Arith r) where
 instance Num r => Semiring (Arith r) where
   (><) = (*)
 
+-- $
+-- Identity of '><':
+-- prop> \ a -> one >< a = (a :: Arith Integer)
+-- prop> \ a -> a >< one = (a :: Arith Integer)
 instance Num r => Unital (Arith r) where
   one = 1
 
