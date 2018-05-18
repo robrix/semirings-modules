@@ -43,3 +43,8 @@ instance Applicative Tropical where
   _        <*> _        = Infinity
   liftA2 f (Finite a) (Finite b) = Finite (f a b)
   liftA2 _ _          _          = Infinity
+
+instance Monad Tropical where
+  (>>) = (*>)
+  Finite a >>= f = f a
+  Infinity >>= _ = Infinity
