@@ -12,7 +12,7 @@ import Data.Coerce (coerce)
 import Data.Data (Data(..))
 import Data.Function (fix)
 import Data.Ix (Ix(..))
-import Data.Semiring.Class
+import Data.Semiring.Class (Semiring(..), Unital(..))
 import GHC.Generics (Generic, Generic1)
 
 -- | The multiplicative 'Semigroup' of 'Semiring's, and multiplicative 'Monoid' of 'Unital' 'Semiring's.
