@@ -11,6 +11,7 @@ import Control.Monad.Fix (MonadFix(..))
 import Data.Data (Data(..))
 import Data.Function (fix)
 import Data.Ix (Ix(..))
+import Data.Semiring.Class (Semiring(..))
 import GHC.Generics (Generic, Generic1)
 
 -- | The 'Semigroup' from 'Num'’s '+' and '*' operators, @0@, and @1@.
@@ -65,3 +66,6 @@ instance Num r => Semigroup (Arith r) where
 
 instance Num r => Monoid (Arith r) where
   mempty = 0
+
+instance Num r => Semiring (Arith r) where
+  (><) = (*)
