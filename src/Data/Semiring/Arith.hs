@@ -67,6 +67,10 @@ instance MonadFix Arith where
 instance Num r => Semigroup (Arith r) where
   (<>) = (+)
 
+-- $
+-- Identity of '<>':
+-- prop> \ a -> zero <> a == (a :: Arith Integer)
+-- prop> \ a -> a <> zero == (a :: Arith Integer)
 instance Num r => Monoid (Arith r) where
   mempty = 0
 
@@ -79,4 +83,5 @@ instance Num r => Unital (Arith r) where
 
 -- $setup
 -- >>> import Test.QuickCheck (Arbitrary(..))
+-- >>> import Data.Semiring.Class (zero)
 -- >>> instance Arbitrary r => Arbitrary (Arith r) where arbitrary = Arith <$> arbitrary ; shrink (Arith r) = map Arith (shrink r)
