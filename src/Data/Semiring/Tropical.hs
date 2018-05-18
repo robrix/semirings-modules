@@ -29,3 +29,7 @@ instance Foldable Tropical where
 instance Functor Tropical where
   fmap f (Finite a) = Finite (f a)
   fmap _ Infinity   = Infinity
+
+instance Traversable Tropical where
+  traverse f (Finite a) = Finite <$> f a
+  traverse _ Infinity   = pure Infinity
