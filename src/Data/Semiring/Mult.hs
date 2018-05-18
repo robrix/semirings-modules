@@ -8,7 +8,6 @@ module Data.Semiring.Mult
 
 import Control.Applicative (Applicative(..))
 import Control.Monad.Fix (MonadFix(..))
-import Data.Coerce (coerce)
 import Data.Data (Data(..))
 import Data.Function (fix)
 import Data.Ix (Ix(..))
@@ -20,29 +19,29 @@ newtype Mult r = Mult { getMult :: r }
   deriving (Bounded, Data, Eq, Generic, Generic1, Ix, Ord, Read, Show)
 
 instance Enum r => Enum (Mult r) where
-  succ = coerce
-  pred = coerce
-  toEnum = coerce (toEnum :: Int -> r)
-  fromEnum = coerce (fromEnum :: r -> Int)
-  enumFrom = coerce (enumFrom :: r -> [r])
-  enumFromThen = coerce (enumFromThen :: r -> r -> [r])
-  enumFromTo = coerce (enumFromTo :: r -> r -> [r])
-  enumFromThenTo = coerce (enumFromThenTo :: r -> r -> r -> [r])
+  succ (Mult a) = Mult (succ a)
+  pred (Mult a) = Mult (pred a)
+  toEnum = Mult . toEnum
+  fromEnum = fromEnum . getMult
+  enumFrom (Mult a) = Mult <$> enumFrom a
+  enumFromThen (Mult a) (Mult b) = Mult <$> enumFromThen a b
+  enumFromTo (Mult a) (Mult b) = Mult <$> enumFromTo a b
+  enumFromThenTo (Mult a) (Mult b) (Mult c) = Mult <$> enumFromThenTo a b c
 
 instance Num r => Num (Mult r) where
-  (+) = coerce ((+) :: r -> r -> r)
-  (*) = coerce ((*) :: r -> r -> r)
-  (-) = coerce ((-) :: r -> r -> r)
-  negate = coerce (negate :: r -> r)
-  abs    = coerce (abs    :: r -> r)
-  signum = coerce (signum :: r -> r)
-  fromInteger = coerce (fromInteger :: Integer -> r)
+  Mult a + Mult b = Mult (a + b)
+  Mult a * Mult b = Mult (a * b)
+  Mult a - Mult b = Mult (a - b)
+  negate (Mult a) = Mult (negate a)
+  abs    (Mult a) = Mult (abs    a)
+  signum (Mult a) = Mult (signum a)
+  fromInteger     = Mult . fromInteger
 
 instance Foldable Mult where
-  foldMap = coerce
+  foldMap f = f . getMult
 
 instance Functor Mult where
-  fmap = coerce
+  fmap f (Mult a) = Mult (f a)
 
 instance Traversable Mult where
   traverse f (Mult a) = Mult <$> f a
@@ -51,8 +50,8 @@ instance Applicative Mult where
   pure = Mult
   a <* _ = a
   _ *> a = a
-  (<*>) = coerce
-  liftA2 = coerce
+  Mult f <*> Mult a = Mult (f a)
+  liftA2 f (Mult a) (Mult b) = Mult (f a b)
 
 instance Monad Mult where
   (>>) = (*>)
@@ -62,7 +61,7 @@ instance MonadFix Mult where
   mfix f = fix (f . getMult)
 
 instance Semiring r => Semigroup (Mult r) where
-  (<>) = coerce ((><) :: r -> r -> r)
+  Mult a <> Mult b = Mult (a >< b)
 
 instance Unital r => Monoid (Mult r) where
   mempty = Mult one
