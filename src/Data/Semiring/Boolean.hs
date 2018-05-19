@@ -54,3 +54,10 @@ instance Monoid Boolean where
 -- prop> zero >< a == (zero :: Boolean)
 instance Semiring Boolean where
   Boolean a >< Boolean b = Boolean (a && b)
+
+-- $
+-- Identity of '><':
+-- prop> one >< a = (a :: Boolean)
+-- prop> a >< one = (a :: Boolean)
+instance Unital Boolean where
+  one = Boolean True
