@@ -55,3 +55,4 @@ instance (Applicative f, Monoid a) => Monoid (App f a) where
 -- >>> import Test.QuickCheck (Arbitrary(..))
 -- >>> import Data.Semiring.Boolean (Boolean(..))
 -- >>> instance Arbitrary (f a) => Arbitrary (App f a) where arbitrary = App <$> arbitrary ; shrink (App f) = map App (shrink f)
+-- >>> instance Arbitrary Boolean where arbitrary = Boolean <$> arbitrary ; shrink (Boolean b) = map Boolean (shrink b)
