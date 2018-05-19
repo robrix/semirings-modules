@@ -15,3 +15,7 @@ instance Functor Zip where
 
 instance Traversable Zip where
   traverse f = fmap Zip . traverse f . getZip
+
+instance Applicative Zip where
+  pure = Zip . pure
+  Zip f <*> Zip a = Zip (f <*> a)
