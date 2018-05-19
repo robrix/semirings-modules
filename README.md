@@ -17,6 +17,8 @@ In this presentation, `Semiring`s are not required to have additive or multiplic
 - `zero` is the multiplicative absorbing element, or annihilator: `zero >< a` is the same as `a >< zero` is the same as `zero`.
 - `one` is the multiplicative identity: `one >< a` is the same as `a >< one` is the same as `a`.
 
+The relationship between `zero` and `><` can be useful for expressing values representing the success/failure of some set of operations, where failure of one operation implies failure of the overall set. This can be seen in the `Semiring` instance for `Maybe`, for which a `Nothing` value on either side results in a `Nothing`.
+
 - [Read the docs][docs].
 
 [docs]: http://antitypical.com/semirings-modules/
