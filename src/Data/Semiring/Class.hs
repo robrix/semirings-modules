@@ -165,6 +165,9 @@ instance Semiring a => Semiring (Maybe a) where
   _       >< Nothing = Nothing
   Just a  >< Just b  = Just (a >< b)
 
+instance Unital a => Unital (Maybe a) where
+  one = Just one
+
 
 -- Data.Monoid
 
