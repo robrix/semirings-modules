@@ -46,8 +46,8 @@ instance (Align f, Semigroup a) => Semigroup (Aligned f a) where
 -- $
 -- Identity of '<>':
 --
--- prop> zero <> a == (a :: App Maybe Int)
--- prop> a <> zero == (a :: App Maybe Int)
+-- prop> zero <> a == (a :: Aligned Maybe Int)
+-- prop> a <> zero == (a :: Aligned Maybe Int)
 instance (Align f, Semigroup a) => Monoid (Aligned f a) where
   mempty = nil
 
