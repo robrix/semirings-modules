@@ -21,6 +21,7 @@ library
                      , Data.Semiring.Arith
                      , Data.Semiring.Boolean
                      , Data.Semiring.Class
+                     , Data.Semiring.Few
                      , Data.Semiring.Mult
                      , Data.Semiring.Tropical
   build-depends:       base >=4.11 && <4.12
