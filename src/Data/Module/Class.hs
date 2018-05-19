@@ -93,6 +93,21 @@ instance Semiring r => Module r r where
 instance Semiring r => Module r (r, r) where
   a ><< (b1, b2) = (a >< b1, a >< b2)
 
+-- $
+-- Left-distributivity of '><<' over '<>':
+-- prop> r ><< (x <> y) = r ><< x <> (r :: Boolean) ><< (y :: (Boolean, Boolean, Boolean))
+--
+-- Left-distributivity of '<>' over '><<':
+-- prop> (r <> s) ><< x = r ><< x <> (s :: Boolean) ><< (x :: (Boolean, Boolean, Boolean))
+--
+-- Left-distributivity of '><' over '><<':
+-- prop> (r >< s) ><< x = r ><< ((s :: Boolean) ><< (x :: (Boolean, Boolean, Boolean)))
+--
+-- Left-identity of '>><':
+-- prop> (one :: Boolean) ><< a == (a :: (Boolean, Boolean, Boolean))
+instance Semiring r => Module r (r, r, r) where
+  a ><< (b1, b2, b3) = (a >< b1, a >< b2, a >< b3)
+
 
 -- $setup
 -- >>> import Test.QuickCheck (Arbitrary(..))
