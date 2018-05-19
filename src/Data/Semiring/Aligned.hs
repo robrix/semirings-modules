@@ -6,7 +6,7 @@ import Control.Monad.Fix (MonadFix(..))
 import Data.Align (Align(..))
 import Data.Data (Data)
 import Data.Ix (Ix)
-import Data.Semiring.Class (Semiring(..))
+import Data.Semiring.Class (Semiring(..), Unital(..))
 import Data.These (mergeThese)
 import GHC.Generics (Generic, Generic1)
 
@@ -76,6 +76,14 @@ instance (Align f, Semigroup a) => Monoid (Aligned f a) where
 -- prop> zero >< a == (zero :: Aligned Maybe Boolean)
 instance (Align f, Applicative f, Semiring a) => Semiring (Aligned f a) where
   (><) = liftA2 (><)
+
+-- $
+-- Identity of '><':
+--
+-- prop> one >< a == (a :: Aligned Maybe Boolean)
+-- prop> a >< one == (a :: Aligned Maybe Boolean)
+instance (Align f, Applicative f, Unital a) => Unital (Aligned f a) where
+  one = pure one
 
 
 -- $setup
