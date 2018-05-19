@@ -116,6 +116,31 @@ instance Unital () where
   one = ()
 
 
+-- $
+-- Associativity of '<>':
+-- prop> a <> (b <> c) ~= (a <> b) <> (c :: Int -> Set Char)
+--
+-- Identity of '<>':
+-- prop> zero <> a ~= (a :: Int -> Set Char)
+-- prop> a <> zero ~= (a :: Int -> Set Char)
+--
+-- Commutativity of '<>':
+-- prop> a >< b = b >< (a :: Int -> Set Char)
+--
+-- Associativity of '><':
+-- prop> a >< (b >< c) ~= (a >< b) >< (c :: Int -> Set Char)
+--
+-- Distributivity of '><' over '<>':
+-- prop> a >< (b <> c) = (a >< b) <> (a >< c :: Int -> Set Char)
+-- prop> (a <> b) >< c = (a >< c) <> (b >< c :: Int -> Set Char)
+--
+-- Absorption of '><' by 'zero':
+-- prop> a >< zero ~= (zero :: Int -> Set Char)
+-- prop> zero >< a ~= (zero :: Int -> Set Char)
+instance Semiring b => Semiring (a -> b) where
+  (f >< g) a = f a >< g a
+
+
 -- Semigroup
 
 -- $
@@ -251,5 +276,10 @@ instance Ord a => Semiring (Set.Set a) where
 
 -- $setup
 -- >>> import Test.QuickCheck (Arbitrary(..))
+-- >>> import Test.QuickCheck.Function
 -- >>> import Data.Semiring.Arith
 -- >>> instance Arbitrary r => Arbitrary (Arith r) where arbitrary = Arith <$> arbitrary ; shrink (Arith r) = map Arith (shrink r)
+-- >>> :{
+-- infix 4 ~=
+-- f ~= g = (==) <$> f <*> g
+-- :}
