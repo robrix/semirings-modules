@@ -61,6 +61,11 @@ instance Semiring Few where
   One  >< One  = One
   _    >< _    = More
 
+-- $
+-- Identity of '><':
+--
+-- prop> one >< a == (a :: Few)
+-- prop> a >< one == (a :: Few)
 instance Unital Few where
   one = One
 
