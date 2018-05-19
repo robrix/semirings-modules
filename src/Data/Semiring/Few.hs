@@ -37,6 +37,24 @@ instance Semigroup Few where
 instance Monoid Few where
   mempty = Zero
 
+-- $
+-- Commutativity of '<>':
+--
+-- prop> a <> b == b <> (a :: Few)
+--
+-- Associativity of '><':
+--
+-- prop> a >< (b >< c) == (a >< b) >< (c :: Few)
+--
+-- Distributivity of '><' over '<>':
+--
+-- prop> a >< (b <> c) == (a >< b) <> (a >< c :: Few)
+-- prop> (a <> b) >< c == (a >< c) <> (b >< c :: Few)
+--
+-- Absorption of '><' by 'zero':
+--
+-- prop> a >< zero == (zero :: Few)
+-- prop> zero >< a == (zero :: Few)
 instance Semiring Few where
   Zero ><    _ = Zero
   _    >< Zero = Zero
