@@ -6,6 +6,7 @@ module Data.Module.Class
   Module(..)
 ) where
 
+import Data.Semiring.App (App(..))
 import Data.Semiring.Class (Semiring(..))
 
 -- | A left @r@-module over a 'Semiring' @r@.
@@ -148,12 +149,33 @@ instance Semiring r => Module r (r, r, r) where
 instance Semiring r => Module r (a -> r) where
   (a ><< b) x = a >< b x
 
+-- | Note that 'App'’s adherence to the distributivity laws depends on the behaviour of @f@. For example, 'App ZipList' is lawful, while 'App []' is not.
+--
+-- Left-distributivity of '><<' over '<>':
+--
+-- prop> r ><< (x <> y) == r ><< x <> (r :: Boolean) ><< (y :: App ZipList Boolean)
+--
+-- Left-distributivity of '<>' over '><<':
+--
+-- prop> (r <> s) ><< x == r ><< x <> (s :: Boolean) ><< (x :: App ZipList Boolean)
+--
+-- Left-distributivity of '><' over '><<':
+--
+-- prop> (r >< s) ><< x == r ><< ((s :: Boolean) ><< (x :: App ZipList Boolean))
+--
+-- Left-identity of '><<':
+--
+-- prop> (one :: Boolean) ><< a == (a :: App ZipList Boolean)
+instance (Applicative f, Semiring r) => Module r (App f r) where
+  a ><< App bs = App ((a ><) <$> bs)
+
 
 -- $setup
 -- >>> import Test.QuickCheck (Arbitrary(..))
 -- >>> import Test.QuickCheck.Function
 -- >>> import Data.Semiring.Boolean
 -- >>> import Data.Semiring.Class (Unital(..), zero)
+-- >>> instance Arbitrary (f a) => Arbitrary (App f a) where arbitrary = App <$> arbitrary ; shrink (App f) = map App (shrink f)
 -- >>> instance Arbitrary Boolean where arbitrary = Boolean <$> arbitrary ; shrink (Boolean b) = map Boolean (shrink b)
 -- >>> :{
 -- infix 4 ~=
