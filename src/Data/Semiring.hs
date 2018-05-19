@@ -1,6 +1,6 @@
 -- | Semirings, with and without multiplicative identities.
 module Data.Semiring
-( module Data.Semiring.Alt
+( module Data.Semiring.Aligned
 , module Data.Semiring.App
 , module Data.Semiring.Arith
 , module Data.Semiring.Boolean
@@ -9,7 +9,7 @@ module Data.Semiring
 , module Data.Semiring.Tropical
 ) where
 
-import Data.Semiring.Alt
+import Data.Semiring.Aligned
 import Data.Semiring.App
 import Data.Semiring.Arith
 import Data.Semiring.Boolean
