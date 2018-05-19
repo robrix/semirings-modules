@@ -149,10 +149,6 @@ instance Unital r => Unital (Dual r) where
 
 -- containers
 
--- | Sets form a 'Semiring' under 'intersection'.
-instance Ord a => Semiring (Set.Set a) where
-  (><) = Set.intersection
-
 -- $
 -- Associativity of '<>':
 -- prop> a <> (b <> c) == (a <> b) <> (c :: Set Char)
@@ -174,6 +170,8 @@ instance Ord a => Semiring (Set.Set a) where
 -- Absorption of '><' by 'zero':
 -- prop> a >< zero == (zero :: Set Char)
 -- prop> zero >< a == (zero :: Set Char)
+instance Ord a => Semiring (Set.Set a) where
+  (><) = Set.intersection
 
 
 -- $setup
