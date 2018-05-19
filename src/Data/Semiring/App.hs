@@ -50,9 +50,32 @@ instance (Applicative f, Semigroup a) => Semigroup (App f a) where
 instance (Applicative f, Monoid a) => Monoid (App f a) where
   mempty = pure zero
 
+-- | Note that the commutativity of '<>' depends on the commutativity of @f@’s 'liftA2' and @a@’s '<>'.
+--
+-- Commutativity of '<>':
+--
+-- prop> a <> b == b <> (a :: App Identity Boolean)
+--
+-- Associativity of '><':
+--
+-- prop> a >< (b >< c) == (a >< b) >< (c :: App Identity Boolean)
+--
+-- Distributivity of '><' over '<>':
+--
+-- prop> a >< (b <> c) == (a >< b) <> (a >< c :: App Identity Boolean)
+-- prop> (a <> b) >< c == (a >< c) <> (b >< c :: App Identity Boolean)
+--
+-- Absorption of '><' by 'zero':
+--
+-- prop> a >< zero == (zero :: App Identity Boolean)
+-- prop> zero >< a == (zero :: App Identity Boolean)
+instance (Applicative f, Semiring a) => Semiring (App f a) where
+  (><) = liftA2 (><)
+
 
 -- $setup
 -- >>> import Test.QuickCheck (Arbitrary(..))
+-- >>> import Data.Functor.Identity (Identity(..))
 -- >>> import Data.Semiring.Boolean (Boolean(..))
 -- >>> instance Arbitrary (f a) => Arbitrary (App f a) where arbitrary = App <$> arbitrary ; shrink (App f) = map App (shrink f)
 -- >>> instance Arbitrary Boolean where arbitrary = Boolean <$> arbitrary ; shrink (Boolean b) = map Boolean (shrink b)
