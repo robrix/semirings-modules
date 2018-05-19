@@ -1,5 +1,5 @@
 {-# LANGUAGE DeriveDataTypeable, DeriveGeneric #-}
--- | The tropical semiring is defined over ℝ ∪ {∞}, with '<>' = 'min' & '><' = '+'.
+-- | The tropical semiring is defined over ℝ ∪ {∞}, with '<>' = 'min' & '><' = '<>'.
 module Data.Semiring.Tropical
 (
 -- * Tropical 'Semiring's
