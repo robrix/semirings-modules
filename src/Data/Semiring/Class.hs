@@ -88,15 +88,6 @@ class Semiring r => Unital r where
 -- base
 
 -- $
--- Associativity of '<>':
---
--- prop> a <> (b <> c) == (a <> b) <> (c :: ())
---
--- Identity of '<>':
---
--- prop> zero <> a == (a :: ())
--- prop> a <> zero == (a :: ())
---
 -- Commutativity of '<>':
 --
 -- prop> a >< b = b >< (a :: ())
@@ -127,15 +118,6 @@ instance Unital () where
 
 
 -- $
--- Associativity of '<>':
---
--- prop> a <> (b <> c) ~= (a <> b) <> (c :: Int -> Set Char)
---
--- Identity of '<>':
---
--- prop> zero <> a ~= (a :: Int -> Set Char)
--- prop> a <> zero ~= (a :: Int -> Set Char)
---
 -- Commutativity of '<>':
 --
 -- prop> a >< b = b >< (a :: Int -> Set Char)
@@ -160,15 +142,6 @@ instance Semiring b => Semiring (a -> b) where
 -- Semigroup
 
 -- $
--- Associativity of '<>':
---
--- prop> a <> (b <> c) == (a <> b) <> (c :: Dual (Set Char))
---
--- Identity of '<>':
---
--- prop> zero <> a == (a :: Dual (Set Char))
--- prop> a <> zero == (a :: Dual (Set Char))
---
 -- Commutativity of '<>':
 --
 -- prop> a >< b = b >< (a :: Dual (Set Char))
@@ -201,15 +174,6 @@ instance Unital r => Unital (Dual r) where
 -- containers
 
 -- $
--- Associativity of '<>':
---
--- prop> a <> (b <> c) == (a <> b) <> (c :: IntMap ())
---
--- Identity of '<>':
---
--- prop> zero <> a == (a :: IntMap ())
--- prop> a <> zero == (a :: IntMap ())
---
 -- Commutativity of '<>':
 --
 -- prop> a >< b = b >< (a :: IntMap ())
@@ -231,15 +195,6 @@ instance Semiring (IntMap.IntMap a) where
   (><) = IntMap.intersection
 
 -- $
--- Associativity of '<>':
---
--- prop> a <> (b <> c) == (a <> b) <> (c :: IntSet)
---
--- Identity of '<>':
---
--- prop> zero <> a == (a :: IntSet)
--- prop> a <> zero == (a :: IntSet)
---
 -- Commutativity of '<>':
 --
 -- prop> a >< b = b >< (a :: IntSet)
@@ -261,15 +216,6 @@ instance Semiring IntSet.IntSet where
   (><) = IntSet.intersection
 
 -- $
--- Associativity of '<>':
---
--- prop> a <> (b <> c) == (a <> b) <> (c :: Map Char ())
---
--- Identity of '<>':
---
--- prop> zero <> a == (a :: Map Char ())
--- prop> a <> zero == (a :: Map Char ())
---
 -- Commutativity of '<>':
 --
 -- prop> a >< b = b >< (a :: Map Char ())
@@ -291,15 +237,6 @@ instance Ord k => Semiring (Map.Map k v) where
   (><) = Map.intersection
 
 -- $
--- Associativity of '<>':
---
--- prop> a <> (b <> c) == (a <> b) <> (c :: Set Char)
---
--- Identity of '<>':
---
--- prop> zero <> a == (a :: Set Char)
--- prop> a <> zero == (a :: Set Char)
---
 -- Commutativity of '<>':
 --
 -- prop> a >< b = b >< (a :: Set Char)
@@ -324,15 +261,6 @@ instance Ord a => Semiring (Set.Set a) where
 -- unordered-containers
 
 -- $
--- Associativity of '<>':
---
--- prop> a <> (b <> c) == (a <> b) <> (c :: HashMap Char)
---
--- Identity of '<>':
---
--- prop> zero <> a == (a :: HashMap Char)
--- prop> a <> zero == (a :: HashMap Char)
---
 -- Commutativity of '<>':
 --
 -- prop> a >< b = b >< (a :: HashMap Char)
@@ -354,15 +282,6 @@ instance (Eq k, Hashable k) => Semiring (HashMap.HashMap k v) where
   (><) = HashMap.intersection
 
 -- $
--- Associativity of '<>':
---
--- prop> a <> (b <> c) == (a <> b) <> (c :: HashSet Char)
---
--- Identity of '<>':
---
--- prop> zero <> a == (a :: HashSet Char)
--- prop> a <> zero == (a :: HashSet Char)
---
 -- Commutativity of '<>':
 --
 -- prop> a >< b = b >< (a :: HashSet Char)
