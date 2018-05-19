@@ -13,3 +13,6 @@ instance Foldable f => Foldable (App f) where
 
 instance Functor f => Functor (App f) where
   fmap f = App . fmap f . getApp
+
+instance Traversable f => Traversable (App f) where
+  traverse f = fmap App . traverse f . getApp
