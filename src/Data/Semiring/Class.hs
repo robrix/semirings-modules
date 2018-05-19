@@ -8,13 +8,14 @@ module Data.Semiring.Class
 , Unital(..)
 ) where
 
+import Control.Applicative (Alternative(..), Applicative(..))
 import Data.Hashable
 import qualified Data.HashMap.Lazy as HashMap
 import qualified Data.HashSet as HashSet
 import qualified Data.IntMap as IntMap
 import qualified Data.IntSet as IntSet
 import qualified Data.Map as Map
-import Data.Semigroup
+import Data.Monoid
 import qualified Data.Set as Set
 
 -- | A 'Semiring' @r@ is an abstract algebraic structure consisting of a commutative 'Semigroup' and an associative operator '><', with the additional constraints that '><' distributes over '<>'. Additionally, if @s@ is a 'Monoid', 'zero' is the absorping element of '><'.
@@ -139,7 +140,37 @@ instance Semiring b => Semiring (a -> b) where
   (f >< g) a = f a >< g a
 
 
--- Semigroup
+-- Monoid
+
+-- $
+-- Commutativity of '<>':
+--
+-- prop> a <> b == b <> (a :: Alt Maybe Boolean)
+--
+-- Associativity of '><':
+--
+-- prop> a >< (b >< c) == (a >< b) >< (c :: Alt Maybe Boolean)
+--
+-- Distributivity of '><' over '<>':
+--
+-- prop> a >< (b <> c) == (a >< b) <> (a >< c :: Alt Maybe Boolean)
+-- prop> (a <> b) >< c == (a >< c) <> (b >< c :: Alt Maybe Boolean)
+--
+-- Absorption of '><' by 'zero':
+--
+-- prop> a >< zero == (zero :: Alt Maybe Boolean)
+-- prop> zero >< a == (zero :: Alt Maybe Boolean)
+instance (Alternative f, Semiring a) => Semiring (Alt f a) where
+  (><) = liftA2 (><)
+
+-- $
+-- Identity of '><':
+--
+-- prop> one >< a == (a :: Alt Maybe Boolean)
+-- prop> a >< one == (a :: Alt Maybe Boolean)
+instance (Alternative f, Unital a) => Unital (Alt f a) where
+  one = pure one
+
 
 -- $
 -- Commutativity of '<>':
