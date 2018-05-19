@@ -48,5 +48,30 @@ class (Semiring r, Semigroup m) => Module r m where
   (><<) :: r -> m -> m
 
 
+-- $
+-- Associativity of '<>':
+-- prop> a <> (b <> c) == (a <> b) <> (c :: ())
+--
+-- Identity of '<>':
+-- prop> zero <> a == (a :: ())
+-- prop> a <> zero == (a :: ())
+--
+-- Left-distributivity of '><<' over '<>':
+-- prop> r ><< (x <> y) = r ><< x <> (r :: Boolean) ><< (y :: ())
+--
+-- Left-distributivity of '<>' over '><<':
+-- prop> (r <> s) ><< x = r ><< x <> (s :: Boolean) ><< (x :: ())
+--
+-- Left-distributivity of '><' over '><<':
+-- prop> (r >< s) ><< x = r ><< ((s :: Boolean) ><< (x :: ()))
+--
+-- Left-identity of '>><':
+-- prop> (one :: Boolean) ><< a == (a :: ())
 instance Semiring r => Module r () where
   _ ><< a = a
+
+
+-- $setup
+-- >>> import Test.QuickCheck (Arbitrary(..))
+-- >>> import Data.Semiring.Boolean
+-- >>> import Data.Semiring.Class (Unital(..), zero)
