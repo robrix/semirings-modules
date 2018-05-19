@@ -30,3 +30,10 @@ instance Enum Boolean where
 -- prop> a <> (b <> c) == (a <> b) <> (c :: Boolean)
 instance Semigroup Boolean where
   Boolean a <> Boolean b = Boolean (a || b)
+
+-- $
+-- Identity of '<>':
+-- prop> zero <> a == (a :: Boolean)
+-- prop> a <> zero == (a :: Boolean)
+instance Monoid Boolean where
+  mempty = Boolean False
