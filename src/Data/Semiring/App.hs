@@ -1,7 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable, DeriveGeneric #-}
 module Data.Semiring.App where
 
-import Control.Applicative (Alternative(..))
+import Control.Applicative (Alternative(..), Applicative(..))
 import Control.Monad.Fix (MonadFix(..))
 import Data.Data (Data)
 import Data.Ix (Ix)
@@ -32,3 +32,17 @@ instance Monad f => Monad (App f) where
 
 instance MonadFix f => MonadFix (App f) where
   mfix f = App (mfix (getApp . f))
+
+
+-- $
+-- Associativity of '<>':
+--
+-- prop> a <> (b <> c) == (a <> b) <> (c :: App [] Boolean)
+instance (Semigroup a, Applicative f) => Semigroup (App f a) where
+  App a <> App b = App (liftA2 (<>) a b)
+
+
+-- $setup
+-- >>> import Test.QuickCheck (Arbitrary(..))
+-- >>> import Data.Semiring.Boolean (Boolean(..))
+-- >>> instance Arbitrary (f a) => Arbitrary (App f a) where arbitrary = App <$> arbitrary ; shrink (App f) = map App (shrink f)
