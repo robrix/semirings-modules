@@ -1,4 +1,5 @@
 {-# LANGUAGE DeriveDataTypeable, DeriveGeneric #-}
+-- | Semigroup under @'liftA2' ('<>')@.
 module Data.Semiring.App where
 
 import Control.Applicative (Alternative(..), Applicative(..))
@@ -9,6 +10,7 @@ import Data.Ix (Ix)
 import Data.Semiring.Class (Semiring(..), Unital(..), zero)
 import GHC.Generics (Generic, Generic1)
 
+-- | Semigroup under @'liftA2' ('<>')@.
 newtype App f a = App { getApp :: f a }
   deriving (Bounded, Data, Eq, Generic, Generic1, Ix, Ord, Read, Show)
 
