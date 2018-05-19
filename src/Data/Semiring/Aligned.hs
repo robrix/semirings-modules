@@ -43,15 +43,15 @@ instance MonadFix f => MonadFix (Aligned f) where
 -- $
 -- Associativity of '<>':
 --
--- prop> a <> (b <> c) == (a <> b) <> (c :: Aligned Maybe Int)
+-- prop> a <> (b <> c) == (a <> b) <> (c :: Aligned Maybe Boolean)
 instance (Align f, Semigroup a) => Semigroup (Aligned f a) where
   (<>) = alignWith (mergeThese (<>))
 
 -- $
 -- Identity of '<>':
 --
--- prop> zero <> a == (a :: Aligned Maybe Int)
--- prop> a <> zero == (a :: Aligned Maybe Int)
+-- prop> zero <> a == (a :: Aligned Maybe Boolean)
+-- prop> a <> zero == (a :: Aligned Maybe Boolean)
 instance (Align f, Semigroup a) => Monoid (Aligned f a) where
   mempty = nil
 
