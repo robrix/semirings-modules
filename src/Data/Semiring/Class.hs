@@ -140,6 +140,32 @@ instance Semiring b => Semiring (a -> b) where
   (f >< g) a = f a >< g a
 
 
+-- Data.Maybe
+
+-- $
+-- Commutativity of '<>':
+--
+-- prop> a <> b == b <> (a :: Ordering)
+--
+-- Associativity of '><':
+--
+-- prop> a >< (b >< c) == (a >< b) >< (c :: Ordering)
+--
+-- Distributivity of '><' over '<>':
+--
+-- prop> a >< (b <> c) == (a >< b) <> (a >< c :: Ordering)
+-- prop> (a <> b) >< c == (a >< c) <> (b >< c :: Ordering)
+--
+-- Absorption of '><' by 'zero':
+--
+-- prop> a >< zero == (zero :: Ordering)
+-- prop> zero >< a == (zero :: Ordering)
+instance Semiring a => Semiring (Maybe a) where
+  Nothing >< _       = Nothing
+  _       >< Nothing = Nothing
+  Just a  >< Just b  = Just (a >< b)
+
+
 -- Data.Monoid
 
 -- $
