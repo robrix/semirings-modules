@@ -12,3 +12,6 @@ instance Foldable Zip where
 
 instance Functor Zip where
   fmap f = Zip . fmap f . getZip
+
+instance Traversable Zip where
+  traverse f = fmap Zip . traverse f . getZip
