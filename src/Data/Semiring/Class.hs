@@ -63,7 +63,7 @@ class Semigroup r => Semiring r where
 
 -- | The identity element of some 'Monoid' @m@.
 --
---   If @m@ is additionally a 'Semiring', this is its additive identity.
+--   If @m@ is additionally a 'Semiring', this is its multiplicative absorping element.
 zero :: Monoid m => m
 zero = mempty
 
