@@ -7,3 +7,6 @@ import GHC.Generics (Generic, Generic1)
 
 newtype Alt f a = Alt { getAlt :: f a }
   deriving (Bounded, Data, Eq, Generic, Generic1, Ix, Ord, Read, Show)
+
+instance Foldable f => Foldable (Alt f) where
+  foldMap f = foldMap f . getAlt
