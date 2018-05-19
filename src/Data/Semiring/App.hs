@@ -1,6 +1,10 @@
 {-# LANGUAGE DeriveDataTypeable, DeriveGeneric #-}
 -- | Semigroup under @'liftA2' ('<>')@.
-module Data.Semiring.App where
+module Data.Semiring.App
+(
+-- * 'Semiring' from 'Applicative'.
+  App(..)
+) where
 
 import Control.Applicative (Alternative(..), Applicative(..))
 import Control.Monad.Fix (MonadFix(..))
