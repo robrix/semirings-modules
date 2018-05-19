@@ -10,6 +10,7 @@ module Data.Semiring.Class
 
 import Data.Semigroup as Semigroup
 import Data.Hashable
+import qualified Data.HashMap.Lazy as HashMap
 import qualified Data.HashSet as HashSet
 import qualified Data.IntMap as IntMap
 import qualified Data.IntSet as IntSet
@@ -277,6 +278,30 @@ instance Ord a => Semiring (Set.Set a) where
 
 
 -- unordered-containers
+
+-- $
+-- Associativity of '<>':
+-- prop> a <> (b <> c) == (a <> b) <> (c :: HashMap Char)
+--
+-- Identity of '<>':
+-- prop> zero <> a == (a :: HashMap Char)
+-- prop> a <> zero == (a :: HashMap Char)
+--
+-- Commutativity of '<>':
+-- prop> a >< b = b >< (a :: HashMap Char)
+--
+-- Associativity of '><':
+-- prop> a >< (b >< c) == (a >< b) >< (c :: HashMap Char)
+--
+-- Distributivity of '><' over '<>':
+-- prop> a >< (b <> c) = (a >< b) <> (a >< c :: HashMap Char)
+-- prop> (a <> b) >< c = (a >< c) <> (b >< c :: HashMap Char)
+--
+-- Absorption of '><' by 'zero':
+-- prop> a >< zero == (zero :: HashMap Char)
+-- prop> zero >< a == (zero :: HashMap Char)
+instance (Eq k, Hashable k) => Semiring (HashMap.HashMap k v) where
+  (><) = HashMap.intersection
 
 -- $
 -- Associativity of '<>':
