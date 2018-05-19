@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable, DeriveGeneric #-}
 module Data.Semiring.Zip where
 
+import Data.Align (Align(..))
 import Data.Data (Data(..))
 import GHC.Generics (Generic, Generic1)
 
@@ -19,3 +20,7 @@ instance Traversable Zip where
 instance Applicative Zip where
   pure = Zip . pure
   Zip f <*> Zip a = Zip (f <*> a)
+
+instance Align Zip where
+  nil = Zip nil
+  alignWith f (Zip a) (Zip b) = Zip (alignWith f a b)
