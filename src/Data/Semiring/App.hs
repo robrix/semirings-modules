@@ -3,6 +3,7 @@ module Data.Semiring.App where
 
 import Control.Applicative (Alternative(..), Applicative(..))
 import Control.Monad.Fix (MonadFix(..))
+import Data.Align (Align(..))
 import Data.Data (Data)
 import Data.Ix (Ix)
 import Data.Semiring.Class (Semiring(..), Unital(..), zero)
@@ -23,6 +24,10 @@ instance Traversable f => Traversable (App f) where
 instance Applicative f => Applicative (App f) where
   pure = App . pure
   App f <*> App a = App (f <*> a)
+
+instance Align f => Align (App f) where
+  nil = App nil
+  alignWith f (App a) (App b) = App (alignWith f a b)
 
 instance Alternative f => Alternative (App f) where
   empty = App empty
