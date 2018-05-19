@@ -1,7 +1,7 @@
 {-# LANGUAGE MultiParamTypeClasses #-}
 module Data.Module.Class where
 
-import Data.Semiring.Class
+import Data.Semiring.Class (Semiring(..))
 
 -- | A left @r@-module over a 'Semiring' @r@.
 --
