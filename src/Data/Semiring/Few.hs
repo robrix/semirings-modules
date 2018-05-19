@@ -3,7 +3,7 @@
 module Data.Semiring.Few
 (
 -- * Semigroup
-  Few
+  Few(..)
 ) where
 
 import Data.Data (Data(..))
