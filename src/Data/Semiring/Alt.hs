@@ -32,3 +32,16 @@ instance Monad f => Monad (Alt f) where
 
 instance MonadFix f => MonadFix (Alt f) where
   mfix f = Alt (mfix (getAlt . f))
+
+
+-- $
+-- Associativity of '<>':
+--
+-- prop> a <> (b <> c) == (a <> b) <> (c :: Alt Maybe Int)
+instance Alternative f => Semigroup (Alt f a) where
+  (<>) = (<|>)
+
+
+-- $setup
+-- >>> import Test.QuickCheck (Arbitrary(..))
+-- >>> instance Arbitrary (f a) => Arbitrary (Alt f a) where arbitrary = Alt <$> arbitrary ; shrink (Alt f) = map Alt (shrink f)
