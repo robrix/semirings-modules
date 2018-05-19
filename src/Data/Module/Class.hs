@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleInstances, MultiParamTypeClasses #-}
+-- | Left R-modules over 'Semiring's.
 module Data.Module.Class
 (
 -- * Left R-modules
