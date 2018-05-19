@@ -40,7 +40,7 @@ instance MonadFix f => MonadFix (App f) where
 --
 -- prop> a <> (b <> c) == (a <> b) <> (c :: App [] Boolean)
 instance (Applicative f, Semigroup a) => Semigroup (App f a) where
-  App a <> App b = App (liftA2 (<>) a b)
+  (<>) = liftA2 (<>)
 
 -- $
 -- Identity of '<>':
