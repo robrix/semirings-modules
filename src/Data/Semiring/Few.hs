@@ -1,11 +1,17 @@
 {-# LANGUAGE DeriveDataTypeable, DeriveGeneric #-}
-module Data.Semiring.Few where
+-- | Semiring expressing zero, one, or arbitrarily many.
+module Data.Semiring.Few
+(
+-- * Semigroup
+  Few
+) where
 
 import Data.Data (Data(..))
 import Data.Ix (Ix(..))
 import Data.Semiring.Class (Semiring(..), Unital(..))
 import GHC.Generics (Generic(..))
 
+-- | A 'Semiring' expressing quantities of zero, one, or arbitrarily many.
 data Few = Zero | One | More
   deriving (Bounded, Data, Enum, Eq, Generic, Ix, Ord, Show)
 
