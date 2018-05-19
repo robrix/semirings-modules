@@ -68,7 +68,7 @@ class (Semiring r, Semigroup m) => LeftModule r m where
 --
 -- prop> (r >< s) ><< x == r ><< ((s :: Boolean) ><< (x :: ()))
 --
--- Left-identity of '>><':
+-- Left-identity of '><<':
 --
 -- prop> (one :: Boolean) ><< a == (a :: ())
 instance Semiring r => LeftModule r () where
@@ -87,7 +87,7 @@ instance Semiring r => LeftModule r () where
 --
 -- prop> (r >< s) ><< x == r ><< ((s :: Boolean) ><< (x :: Boolean))
 --
--- Left-identity of '>><':
+-- Left-identity of '><<':
 --
 -- prop> (one :: Boolean) ><< a == (a :: Boolean)
 instance Semiring r => LeftModule r r where
@@ -106,7 +106,7 @@ instance Semiring r => LeftModule r r where
 --
 -- prop> (r >< s) ><< x == r ><< ((s :: Boolean) ><< (x :: (Boolean, Boolean)))
 --
--- Left-identity of '>><':
+-- Left-identity of '><<':
 --
 -- prop> (one :: Boolean) ><< a == (a :: (Boolean, Boolean))
 instance Semiring r => LeftModule r (r, r) where
@@ -125,7 +125,7 @@ instance Semiring r => LeftModule r (r, r) where
 --
 -- prop> (r >< s) ><< x == r ><< ((s :: Boolean) ><< (x :: (Boolean, Boolean, Boolean)))
 --
--- Left-identity of '>><':
+-- Left-identity of '><<':
 --
 -- prop> (one :: Boolean) ><< a == (a :: (Boolean, Boolean, Boolean))
 instance Semiring r => LeftModule r (r, r, r) where
