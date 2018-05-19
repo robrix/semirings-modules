@@ -3,7 +3,7 @@ module Data.Semiring.Few where
 
 import Data.Data (Data(..))
 import Data.Ix (Ix(..))
-import Data.Semiring.Class (Semiring(..))
+import Data.Semiring.Class (Semiring(..), Unital(..))
 import GHC.Generics (Generic(..))
 
 data Few = Zero | One | More
@@ -22,3 +22,6 @@ instance Semiring Few where
   _    >< Zero = Zero
   One  >< One  = One
   _    >< _    = More
+
+instance Unital Few where
+  one = One
