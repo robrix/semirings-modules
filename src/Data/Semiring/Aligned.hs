@@ -1,4 +1,5 @@
 {-# LANGUAGE DeriveDataTypeable, DeriveGeneric #-}
+-- | Semigroup under @'alignWith' ('mergeThese' ('<>'))@.
 module Data.Semiring.Aligned where
 
 import Control.Applicative (Alternative(..), Applicative(..))
@@ -10,6 +11,9 @@ import Data.Semiring.Class (Semiring(..), Unital(..))
 import Data.These (mergeThese)
 import GHC.Generics (Generic, Generic1)
 
+-- | Semigroup under @'alignWith' ('mergeThese' ('<>'))@.
+--
+--   'Data.Monoid.Alt' : 'Alternative' :: 'Aligned' : 'Align'
 newtype Aligned f a = Aligned { getAligned :: f a }
   deriving (Bounded, Data, Eq, Generic, Generic1, Ix, Ord, Read, Show)
 
