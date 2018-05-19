@@ -29,6 +29,11 @@ instance Semigroup Few where
   a    <> Zero = a
   _    <> _    = More
 
+-- $
+-- Identity of '<>':
+--
+-- prop> zero <> a == (a :: Few)
+-- prop> a <> zero == (a :: Few)
 instance Monoid Few where
   mempty = Zero
 
