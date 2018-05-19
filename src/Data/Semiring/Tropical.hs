@@ -121,8 +121,8 @@ instance (Monoid r, Ord r) => Unital (Tropical r) where
 
 
 -- $setup
--- >>> import Test.QuickCheck (Arbitrary(..))
+-- >>> import Test.QuickCheck (Arbitrary(..), oneof)
 -- >>> import Data.Semiring.Arith (Arith(..))
 -- >>> import Data.Set (Set, fromList)
--- >>> instance Arbitrary r => Arbitrary (Tropical r) where arbitrary = Finite <$> arbitrary ; shrink (Finite r) = map Finite (shrink r) ; shrink Infinity = []
+-- >>> instance Arbitrary r => Arbitrary (Tropical r) where arbitrary = oneof [ Finite <$> arbitrary, pure Infinity ] ; shrink (Finite r) = map Finite (shrink r) ; shrink Infinity = []
 -- >>> instance Arbitrary r => Arbitrary (Arith r) where arbitrary = Arith <$> arbitrary ; shrink (Arith r) = map Arith (shrink r)
