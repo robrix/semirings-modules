@@ -233,6 +233,25 @@ instance Semiring r => RightModule r r where
 instance Semiring r => RightModule r (r, r) where
   (a1, a2) >>< b = (a1 >< b, a2 >< b)
 
+-- $
+-- Right-distributivity of '>><' over '<>':
+--
+-- prop> r >>< (x <> y) == r >>< x <> (r :: Boolean) >>< (y :: (Boolean, Boolean, Boolean))
+--
+-- Right-distributivity of '<>' over '>><':
+--
+-- prop> (r <> s) >>< x == r >>< x <> (s :: Boolean) >>< (x :: (Boolean, Boolean, Boolean))
+--
+-- Right-distributivity of '><' over '>><':
+--
+-- prop> (r >< s) >>< x == r >>< ((s :: Boolean) >>< (x :: (Boolean, Boolean, Boolean)))
+--
+-- Right-identity of '>><':
+--
+-- prop> (one :: Boolean) >>< a == (a :: (Boolean, Boolean, Boolean))
+instance Semiring r => RightModule r (r, r, r) where
+  (a1, a2, a3) >>< b = (a1 >< b, a2 >< b, a3 >< b)
+
 
 -- $setup
 -- >>> import Test.QuickCheck (Arbitrary(..))
