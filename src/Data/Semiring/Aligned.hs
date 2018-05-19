@@ -1,7 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable, DeriveGeneric #-}
 module Data.Semiring.Aligned where
 
-import Control.Applicative (Alternative(..))
+import Control.Applicative (Alternative(..), Applicative(..))
 import Control.Monad.Fix (MonadFix(..))
 import Data.Align (Align(..))
 import Data.Data (Data)
