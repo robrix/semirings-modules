@@ -10,3 +10,6 @@ newtype Alt f a = Alt { getAlt :: f a }
 
 instance Foldable f => Foldable (Alt f) where
   foldMap f = foldMap f . getAlt
+
+instance Functor f => Functor (Alt f) where
+  fmap f = Alt . fmap f . getAlt
