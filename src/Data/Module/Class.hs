@@ -3,7 +3,7 @@
 module Data.Module.Class
 (
 -- * Left R-modules
-  Module(..)
+  LeftModule(..)
 ) where
 
 import Data.Semiring.Class (Semiring(..))
@@ -48,7 +48,7 @@ import Data.Semiring.Class (Semiring(..))
 -- @
 --   one ><< a = a
 -- @
-class (Semiring r, Semigroup m) => Module r m where
+class (Semiring r, Semigroup m) => LeftModule r m where
   infixl 7 ><<
   (><<) :: r -> m -> m
 
@@ -69,7 +69,7 @@ class (Semiring r, Semigroup m) => Module r m where
 -- Left-identity of '>><':
 --
 -- prop> (one :: Boolean) ><< a == (a :: ())
-instance Semiring r => Module r () where
+instance Semiring r => LeftModule r () where
   _ ><< a = a
 
 -- $
@@ -88,7 +88,7 @@ instance Semiring r => Module r () where
 -- Left-identity of '>><':
 --
 -- prop> (one :: Boolean) ><< a == (a :: Boolean)
-instance Semiring r => Module r r where
+instance Semiring r => LeftModule r r where
   (><<) = (><)
 
 -- $
@@ -107,7 +107,7 @@ instance Semiring r => Module r r where
 -- Left-identity of '>><':
 --
 -- prop> (one :: Boolean) ><< a == (a :: (Boolean, Boolean))
-instance Semiring r => Module r (r, r) where
+instance Semiring r => LeftModule r (r, r) where
   a ><< (b1, b2) = (a >< b1, a >< b2)
 
 -- $
@@ -126,7 +126,7 @@ instance Semiring r => Module r (r, r) where
 -- Left-identity of '>><':
 --
 -- prop> (one :: Boolean) ><< a == (a :: (Boolean, Boolean, Boolean))
-instance Semiring r => Module r (r, r, r) where
+instance Semiring r => LeftModule r (r, r, r) where
   a ><< (b1, b2, b3) = (a >< b1, a >< b2, a >< b3)
 
 
