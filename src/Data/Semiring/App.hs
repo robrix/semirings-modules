@@ -10,3 +10,6 @@ newtype App f a = App { getApp :: f a }
 
 instance Foldable f => Foldable (App f) where
   foldMap f = foldMap f . getApp
+
+instance Functor f => Functor (App f) where
+  fmap f = App . fmap f . getApp
