@@ -140,7 +140,7 @@ instance Semiring b => Semiring (a -> b) where
   (f >< g) a = f a >< g a
 
 
--- Monoid
+-- Data.Monoid
 
 -- $
 -- Commutativity of '<>':
