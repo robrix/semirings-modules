@@ -29,6 +29,10 @@ instance Alternative f => Alternative (Aligned f) where
   empty = Aligned empty
   Aligned a <|> Aligned b = Aligned (a <|> b)
 
+instance Align f => Align (Aligned f) where
+  nil = Aligned nil
+  alignWith f (Aligned a) (Aligned b) = Aligned (alignWith f a b)
+
 instance Monad f => Monad (Aligned f) where
   Aligned a >>= f = Aligned (a >>= getAligned . f)
 
