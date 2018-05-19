@@ -9,17 +9,17 @@ import Data.Ix (Ix)
 import Data.These (mergeThese)
 import GHC.Generics (Generic, Generic1)
 
-newtype Aligned f a = Aligned { getAlt :: f a }
+newtype Aligned f a = Aligned { getAligned :: f a }
   deriving (Bounded, Data, Eq, Generic, Generic1, Ix, Ord, Read, Show)
 
 instance Foldable f => Foldable (Aligned f) where
-  foldMap f = foldMap f . getAlt
+  foldMap f = foldMap f . getAligned
 
 instance Functor f => Functor (Aligned f) where
-  fmap f = Aligned . fmap f . getAlt
+  fmap f = Aligned . fmap f . getAligned
 
 instance Traversable f => Traversable (Aligned f) where
-  traverse f = fmap Aligned . traverse f . getAlt
+  traverse f = fmap Aligned . traverse f . getAligned
 
 instance Applicative f => Applicative (Aligned f) where
   pure = Aligned . pure
@@ -30,10 +30,10 @@ instance Alternative f => Alternative (Aligned f) where
   Aligned a <|> Aligned b = Aligned (a <|> b)
 
 instance Monad f => Monad (Aligned f) where
-  Aligned a >>= f = Aligned (a >>= getAlt . f)
+  Aligned a >>= f = Aligned (a >>= getAligned . f)
 
 instance MonadFix f => MonadFix (Aligned f) where
-  mfix f = Aligned (mfix (getAlt . f))
+  mfix f = Aligned (mfix (getAligned . f))
 
 
 -- $
