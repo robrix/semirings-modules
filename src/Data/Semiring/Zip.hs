@@ -6,3 +6,6 @@ import GHC.Generics (Generic, Generic1)
 
 newtype Zip a = Zip { getZip :: [a] }
   deriving (Data, Eq, Generic, Generic1, Ord, Read, Show)
+
+instance Foldable Zip where
+  foldMap f = foldMap f . getZip
