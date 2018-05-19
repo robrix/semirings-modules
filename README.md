@@ -28,4 +28,4 @@ R-modules over some semiring R generalize the notion of vector spaces over a fie
 
 - [Read the docs][docs].
 
-[docs]: http://antitypical.com/semirings-modules/
+[docs]: https://antitypical.com/semirings-modules/
