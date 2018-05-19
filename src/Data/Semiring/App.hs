@@ -16,3 +16,7 @@ instance Functor f => Functor (App f) where
 
 instance Traversable f => Traversable (App f) where
   traverse f = fmap App . traverse f . getApp
+
+instance Applicative f => Applicative (App f) where
+  pure = App . pure
+  App f <*> App a = App (f <*> a)
