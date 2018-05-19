@@ -1,5 +1,9 @@
 {-# LANGUAGE FlexibleInstances, MultiParamTypeClasses #-}
-module Data.Module.Class where
+module Data.Module.Class
+(
+-- * Left R-modules
+  Module(..)
+) where
 
 import Data.Semiring.Class (Semiring(..))
 
