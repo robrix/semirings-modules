@@ -131,6 +131,25 @@ instance Semiring r => LeftModule r (r, r) where
 instance Semiring r => LeftModule r (r, r, r) where
   a ><< (b1, b2, b3) = (a >< b1, a >< b2, a >< b3)
 
+-- $
+-- Left-distributivity of '><<' over '<>':
+--
+-- prop> r ><< (x <> y) ~= r ><< x <> (r :: Boolean) ><< (y :: Int -> Boolean)
+--
+-- Left-distributivity of '<>' over '><<':
+--
+-- prop> (r <> s) ><< x ~= r ><< x <> (s :: Boolean) ><< (x :: Int -> Boolean)
+--
+-- Left-distributivity of '><' over '><<':
+--
+-- prop> (r >< s) ><< x ~= r ><< ((s :: Boolean) ><< (x :: Int -> Boolean))
+--
+-- Left-identity of '><<':
+--
+-- prop> (one :: Boolean) ><< a ~= (a :: Int -> Boolean)
+instance Semiring r => LeftModule r (a -> r) where
+  (a ><< b) x = a >< b x
+
 
 -- | A right @r@-module over a 'Semiring' @r@.
 --
@@ -255,6 +274,11 @@ instance Semiring r => RightModule r (r, r, r) where
 
 -- $setup
 -- >>> import Test.QuickCheck (Arbitrary(..))
+-- >>> import Test.QuickCheck.Function
 -- >>> import Data.Semiring.Boolean
 -- >>> import Data.Semiring.Class (Unital(..), zero)
 -- >>> instance Arbitrary Boolean where arbitrary = Boolean <$> arbitrary ; shrink (Boolean b) = map Boolean (shrink b)
+-- >>> :{
+-- infix 4 ~=
+-- f ~= g = (==) <$> f <*> g
+-- :}
