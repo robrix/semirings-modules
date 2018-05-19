@@ -9,6 +9,7 @@ module Data.Semiring.Class
 ) where
 
 import Data.Semigroup as Semigroup
+import qualified Data.Map as Map
 import qualified Data.Set as Set
 
 -- | A 'Semiring' @r@ is an abstract algebraic structure consisting of a commutative 'Semigroup' and an associative operator '><', with the additional constraints that '><' distributes over '<>'. Additionally, if @s@ is a 'Monoid', 'zero' is the absorping element of '><'.
@@ -148,6 +149,30 @@ instance Unital r => Unital (Dual r) where
 
 
 -- containers
+
+-- $
+-- Associativity of '<>':
+-- prop> a <> (b <> c) == (a <> b) <> (c :: Map Char ())
+--
+-- Identity of '<>':
+-- prop> zero <> a == (a :: Map Char ())
+-- prop> a <> zero == (a :: Map Char ())
+--
+-- Commutativity of '<>':
+-- prop> a >< b = b >< (a :: Map Char ())
+--
+-- Associativity of '><':
+-- prop> a >< (b >< c) == (a >< b) >< (c :: Map Char ())
+--
+-- Distributivity of '><' over '<>':
+-- prop> a >< (b <> c) = (a >< b) <> (a >< c :: Map Char ())
+-- prop> (a <> b) >< c = (a >< c) <> (b >< c :: Map Char ())
+--
+-- Absorption of '><' by 'zero':
+-- prop> a >< zero == (zero :: Map Char ())
+-- prop> zero >< a == (zero :: Map Char ())
+instance Ord k => Semiring (Map.Map k v) where
+  (><) = Map.intersection
 
 -- $
 -- Associativity of '<>':
