@@ -145,26 +145,31 @@ instance Semiring b => Semiring (a -> b) where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a <> b == b <> (a :: Ordering)
+-- prop> a <> b == b <> (a :: Maybe (Set Char))
 --
 -- Associativity of '><':
 --
--- prop> a >< (b >< c) == (a >< b) >< (c :: Ordering)
+-- prop> a >< (b >< c) == (a >< b) >< (c :: Maybe (Set Char))
 --
 -- Distributivity of '><' over '<>':
 --
--- prop> a >< (b <> c) == (a >< b) <> (a >< c :: Ordering)
--- prop> (a <> b) >< c == (a >< c) <> (b >< c :: Ordering)
+-- prop> a >< (b <> c) == (a >< b) <> (a >< c :: Maybe (Set Char))
+-- prop> (a <> b) >< c == (a >< c) <> (b >< c :: Maybe (Set Char))
 --
 -- Absorption of '><' by 'zero':
 --
--- prop> a >< zero == (zero :: Ordering)
--- prop> zero >< a == (zero :: Ordering)
+-- prop> a >< zero == (zero :: Maybe (Set Char))
+-- prop> zero >< a == (zero :: Maybe (Set Char))
 instance Semiring a => Semiring (Maybe a) where
   Nothing >< _       = Nothing
   _       >< Nothing = Nothing
   Just a  >< Just b  = Just (a >< b)
 
+-- $
+-- Identity of '><':
+--
+-- prop> one >< a == (a :: Maybe (Set Char))
+-- prop> a >< one == (a :: Maybe (Set Char))
 instance Unital a => Unital (Maybe a) where
   one = Just one
 
