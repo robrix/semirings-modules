@@ -1,4 +1,4 @@
-{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE FlexibleInstances, MultiParamTypeClasses #-}
 module Data.Module.Class where
 
 import Data.Semiring.Class (Semiring(..))
@@ -42,3 +42,7 @@ import Data.Semiring.Class (Semiring(..))
 class (Semiring r, Semigroup m) => Module r m where
   infixl 7 ><<
   (><<) :: r -> m -> m
+
+
+instance Semiring r => Module r () where
+  _ ><< a = a
