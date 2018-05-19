@@ -25,3 +25,6 @@ instance Applicative f => Applicative (App f) where
 instance Alternative f => Alternative (App f) where
   empty = App empty
   App a <|> App b = App (a <|> b)
+
+instance Monad f => Monad (App f) where
+  App a >>= f = App (a >>= getApp . f)
