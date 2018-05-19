@@ -8,14 +8,12 @@ module Data.Semiring.Class
 , Unital(..)
 ) where
 
-import Control.Applicative (Alternative(..))
 import Data.Hashable
 import qualified Data.HashMap.Lazy as HashMap
 import qualified Data.HashSet as HashSet
 import qualified Data.IntMap as IntMap
 import qualified Data.IntSet as IntSet
 import qualified Data.Map as Map
-import Data.Monoid (Alt(..))
 import Data.Semigroup as Semigroup
 import qualified Data.Set as Set
 
