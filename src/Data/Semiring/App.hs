@@ -5,7 +5,7 @@ import Control.Applicative (Alternative(..), Applicative(..))
 import Control.Monad.Fix (MonadFix(..))
 import Data.Data (Data)
 import Data.Ix (Ix)
-import Data.Semiring.Class (Semiring(..), zero)
+import Data.Semiring.Class (Semiring(..), Unital(..), zero)
 import GHC.Generics (Generic, Generic1)
 
 newtype App f a = App { getApp :: f a }
@@ -71,6 +71,14 @@ instance (Applicative f, Monoid a) => Monoid (App f a) where
 -- prop> zero >< a == (zero :: App Identity Boolean)
 instance (Applicative f, Semiring a) => Semiring (App f a) where
   (><) = liftA2 (><)
+
+-- $
+-- Identity of '><':
+--
+-- prop> one >< a == (a :: App Identity Boolean)
+-- prop> a >< one == (a :: App Identity Boolean)
+instance (Applicative f, Unital a) => Unital (App f a) where
+  one = pure one
 
 
 -- $setup
