@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable, DeriveGeneric #-}
 module Data.Semiring.App where
 
+import Control.Applicative (Alternative(..))
 import Data.Data (Data)
 import Data.Ix (Ix)
 import GHC.Generics (Generic, Generic1)
@@ -20,3 +21,7 @@ instance Traversable f => Traversable (App f) where
 instance Applicative f => Applicative (App f) where
   pure = App . pure
   App f <*> App a = App (f <*> a)
+
+instance Alternative f => Alternative (App f) where
+  empty = App empty
+  App a <|> App b = App (a <|> b)
