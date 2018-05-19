@@ -41,7 +41,16 @@ instance MonadFix f => MonadFix (Alt f) where
 instance Alternative f => Semigroup (Alt f a) where
   (<>) = (<|>)
 
+-- $
+-- Identity of '<>':
+--
+-- prop> zero <> a == (a :: App Maybe Int)
+-- prop> a <> zero == (a :: App Maybe Int)
+instance Alternative f => Monoid (Alt f a) where
+  mempty = empty
+
 
 -- $setup
 -- >>> import Test.QuickCheck (Arbitrary(..))
+-- >>> import Data.Semiring.Class (zero)
 -- >>> instance Arbitrary (f a) => Arbitrary (Alt f a) where arbitrary = Alt <$> arbitrary ; shrink (Alt f) = map Alt (shrink f)
