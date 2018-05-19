@@ -37,3 +37,20 @@ instance Semigroup Boolean where
 -- prop> a <> zero == (a :: Boolean)
 instance Monoid Boolean where
   mempty = Boolean False
+
+-- $
+-- Commutativity of '<>':
+-- prop> a >< b = b >< (a :: Boolean)
+--
+-- Associativity of '><':
+-- prop> a >< (b >< c) == (a >< b) >< (c :: Boolean)
+--
+-- Distributivity of '><' over '<>':
+-- prop> a >< (b <> c) = (a >< b) <> (a >< c :: Boolean)
+-- prop> (a <> b) >< c = (a >< c) <> (b >< c :: Boolean)
+--
+-- Absorption of '><' by 'zero':
+-- prop> a >< zero == (zero :: Boolean)
+-- prop> zero >< a == (zero :: Boolean)
+instance Semiring Boolean where
+  Boolean a >< Boolean b = Boolean (a && b)
