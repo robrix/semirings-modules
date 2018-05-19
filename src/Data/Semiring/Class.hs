@@ -9,6 +9,7 @@ module Data.Semiring.Class
 ) where
 
 import Data.Semigroup as Semigroup
+import qualified Data.IntMap as IntMap
 import qualified Data.IntSet as IntSet
 import qualified Data.Map as Map
 import qualified Data.Set as Set
@@ -150,6 +151,30 @@ instance Unital r => Unital (Dual r) where
 
 
 -- containers
+
+-- $
+-- Associativity of '<>':
+-- prop> a <> (b <> c) == (a <> b) <> (c :: IntMap ())
+--
+-- Identity of '<>':
+-- prop> zero <> a == (a :: IntMap ())
+-- prop> a <> zero == (a :: IntMap ())
+--
+-- Commutativity of '<>':
+-- prop> a >< b = b >< (a :: IntMap ())
+--
+-- Associativity of '><':
+-- prop> a >< (b >< c) == (a >< b) >< (c :: IntMap ())
+--
+-- Distributivity of '><' over '<>':
+-- prop> a >< (b <> c) = (a >< b) <> (a >< c :: IntMap ())
+-- prop> (a <> b) >< c = (a >< c) <> (b >< c :: IntMap ())
+--
+-- Absorption of '><' by 'zero':
+-- prop> a >< zero == (zero :: IntMap ())
+-- prop> zero >< a == (zero :: IntMap ())
+instance Semiring (IntMap.IntMap a) where
+  (><) = IntMap.intersection
 
 -- $
 -- Associativity of '<>':
