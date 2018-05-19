@@ -5,7 +5,7 @@ import Control.Applicative (Alternative(..), Applicative(..))
 import Control.Monad.Fix (MonadFix(..))
 import Data.Data (Data)
 import Data.Ix (Ix)
-import Data.Semiring.Class (zero)
+import Data.Semiring.Class (Semiring(..), zero)
 import GHC.Generics (Generic, Generic1)
 
 newtype App f a = App { getApp :: f a }
@@ -48,7 +48,7 @@ instance (Applicative f, Semigroup a) => Semigroup (App f a) where
 -- prop> zero <> a == (a :: App [] Boolean)
 -- prop> a <> zero == (a :: App [] Boolean)
 instance (Applicative f, Monoid a) => Monoid (App f a) where
-  mempty = App (pure zero)
+  mempty = pure zero
 
 
 -- $setup
