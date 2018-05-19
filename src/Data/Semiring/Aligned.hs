@@ -3,8 +3,10 @@ module Data.Semiring.Aligned where
 
 import Control.Applicative (Alternative(..))
 import Control.Monad.Fix (MonadFix(..))
+import Data.Align (Align(..))
 import Data.Data (Data)
 import Data.Ix (Ix)
+import Data.These (mergeThese)
 import GHC.Generics (Generic, Generic1)
 
 newtype Aligned f a = Aligned { getAlt :: f a }
@@ -38,16 +40,16 @@ instance MonadFix f => MonadFix (Aligned f) where
 -- Associativity of '<>':
 --
 -- prop> a <> (b <> c) == (a <> b) <> (c :: Aligned Maybe Int)
-instance Alternative f => Semigroup (Aligned f a) where
-  (<>) = (<|>)
+instance (Align f, Semigroup a) => Semigroup (Aligned f a) where
+  (<>) = alignWith (mergeThese (<>))
 
 -- $
 -- Identity of '<>':
 --
 -- prop> zero <> a == (a :: App Maybe Int)
 -- prop> a <> zero == (a :: App Maybe Int)
-instance Alternative f => Monoid (Aligned f a) where
-  mempty = empty
+instance (Align f, Semigroup a) => Monoid (Aligned f a) where
+  mempty = nil
 
 
 -- $setup
