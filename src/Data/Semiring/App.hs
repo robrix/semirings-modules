@@ -38,15 +38,15 @@ instance MonadFix f => MonadFix (App f) where
 -- $
 -- Associativity of '<>':
 --
--- prop> a <> (b <> c) == (a <> b) <> (c :: App [] Boolean)
+-- prop> a <> (b <> c) == (a <> b) <> (c :: App Maybe Boolean)
 instance (Applicative f, Semigroup a) => Semigroup (App f a) where
   (<>) = liftA2 (<>)
 
 -- $
 -- Identity of '<>':
 --
--- prop> zero <> a == (a :: App [] Boolean)
--- prop> a <> zero == (a :: App [] Boolean)
+-- prop> zero <> a == (a :: App Maybe Boolean)
+-- prop> a <> zero == (a :: App Maybe Boolean)
 instance (Applicative f, Monoid a) => Monoid (App f a) where
   mempty = pure zero
 
