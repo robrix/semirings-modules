@@ -120,21 +120,21 @@ instance Unital () where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b = b >< (a :: Int -> Set Char)
+-- prop> \ (Fn a) (Fn b) -> a >< b ~= b >< (a :: Int -> Set Char)
 --
 -- Associativity of '><':
 --
--- prop> a >< (b >< c) ~= (a >< b) >< (c :: Int -> Set Char)
+-- prop> \ (Fn a) (Fn b) (Fn c) -> a >< (b >< c) ~= (a >< b) >< (c :: Int -> Set Char)
 --
 -- Distributivity of '><' over '<>':
 --
--- prop> a >< (b <> c) = (a >< b) <> (a >< c :: Int -> Set Char)
--- prop> (a <> b) >< c = (a >< c) <> (b >< c :: Int -> Set Char)
+-- prop> \ (Fn a) (Fn b) (Fn c) -> a >< (b <> c) ~= (a >< b) <> (a >< c :: Int -> Set Char)
+-- prop> \ (Fn a) (Fn b) (Fn c) -> (a <> b) >< c ~= (a >< c) <> (b >< c :: Int -> Set Char)
 --
 -- Absorption of '><' by 'zero':
 --
--- prop> a >< zero ~= (zero :: Int -> Set Char)
--- prop> zero >< a ~= (zero :: Int -> Set Char)
+-- prop> \ (Fn a) -> a >< zero ~= (zero :: Int -> Set Char)
+-- prop> \ (Fn a) -> zero >< a ~= (zero :: Int -> Set Char)
 instance Semiring b => Semiring (a -> b) where
   (f >< g) a = f a >< g a
 
