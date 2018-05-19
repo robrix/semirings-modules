@@ -133,6 +133,25 @@ instance Semiring r => Module r (r, r, r) where
 -- $
 -- Left-distributivity of '><<' over '<>':
 --
+-- prop> r ><< (x <> y) == r ><< x <> (r :: Boolean) ><< (y :: (Boolean, Boolean, Boolean, Boolean))
+--
+-- Left-distributivity of '<>' over '><<':
+--
+-- prop> (r <> s) ><< x == r ><< x <> (s :: Boolean) ><< (x :: (Boolean, Boolean, Boolean, Boolean))
+--
+-- Left-distributivity of '><' over '><<':
+--
+-- prop> (r >< s) ><< x == r ><< ((s :: Boolean) ><< (x :: (Boolean, Boolean, Boolean, Boolean)))
+--
+-- Left-identity of '><<':
+--
+-- prop> (one :: Boolean) ><< a == (a :: (Boolean, Boolean, Boolean, Boolean))
+instance Semiring r => Module r (r, r, r, r) where
+  a ><< (b1, b2, b3, b4) = (a >< b1, a >< b2, a >< b3, a >< b4)
+
+-- $
+-- Left-distributivity of '><<' over '<>':
+--
 -- prop> \ (Fn x) (Fn y) -> r ><< (x <> y) ~= r ><< x <> (r :: Boolean) ><< (y :: Int -> Boolean)
 --
 -- Left-distributivity of '<>' over '><<':
