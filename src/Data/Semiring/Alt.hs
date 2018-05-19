@@ -1,6 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable, DeriveGeneric #-}
 module Data.Semiring.Alt where
 
+import Control.Applicative (Alternative(..))
 import Data.Data (Data)
 import Data.Ix (Ix)
 import GHC.Generics (Generic, Generic1)
@@ -20,3 +21,7 @@ instance Traversable f => Traversable (Alt f) where
 instance Applicative f => Applicative (Alt f) where
   pure = Alt . pure
   Alt f <*> Alt a = Alt (f <*> a)
+
+instance Alternative f => Alternative (Alt f) where
+  empty = Alt empty
+  Alt a <|> Alt b = Alt (a <|> b)
