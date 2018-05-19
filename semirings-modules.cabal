@@ -23,7 +23,7 @@ library
                      , Data.Semiring.Class
                      , Data.Semiring.Mult
                      , Data.Semiring.Tropical
-                     , Data.Semiring.Zip
+                     , Data.Semiring.Zipping
   build-depends:       base >=4.11 && <4.12
                      , containers
                      , hashable

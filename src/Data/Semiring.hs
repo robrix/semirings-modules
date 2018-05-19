@@ -7,7 +7,7 @@ module Data.Semiring
 , module Data.Semiring.Class
 , module Data.Semiring.Mult
 , module Data.Semiring.Tropical
-, module Data.Semiring.Zip
+, module Data.Semiring.Zipping
 ) where
 
 import Data.Semiring.Aligned
@@ -17,4 +17,4 @@ import Data.Semiring.Boolean
 import Data.Semiring.Class
 import Data.Semiring.Mult
 import Data.Semiring.Tropical
-import Data.Semiring.Zip
+import Data.Semiring.Zipping
