@@ -7,3 +7,6 @@ import GHC.Generics (Generic, Generic1)
 
 newtype App f a = App { getApp :: f a }
   deriving (Bounded, Data, Eq, Generic, Generic1, Ix, Ord, Read, Show)
+
+instance Foldable f => Foldable (App f) where
+  foldMap f = foldMap f . getApp
