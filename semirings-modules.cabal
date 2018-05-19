@@ -14,7 +14,8 @@ extra-source-files:  ChangeLog.md
 cabal-version:       >=1.10
 
 library
-  exposed-modules:     Data.Semiring
+  exposed-modules:     Data.Module.Class
+                     , Data.Semiring
                      , Data.Semiring.Arith
                      , Data.Semiring.Boolean
                      , Data.Semiring.Class
