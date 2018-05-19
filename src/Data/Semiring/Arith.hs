@@ -63,12 +63,14 @@ instance MonadFix Arith where
 
 -- $
 -- Associativity of '<>':
+--
 -- prop> a <> (b <> c) == (a <> b) <> (c :: Arith Integer)
 instance Num r => Semigroup (Arith r) where
   (<>) = (+)
 
 -- $
 -- Identity of '<>':
+--
 -- prop> zero <> a == (a :: Arith Integer)
 -- prop> a <> zero == (a :: Arith Integer)
 instance Num r => Monoid (Arith r) where
@@ -76,16 +78,20 @@ instance Num r => Monoid (Arith r) where
 
 -- $
 -- Commutativity of '<>':
+--
 -- prop> a >< b = b >< (a :: Arith Integer)
 --
 -- Associativity of '><':
+--
 -- prop> a >< (b >< c) == (a >< b) >< (c :: Arith Integer)
 --
 -- Distributivity of '><' over '<>':
+--
 -- prop> a >< (b <> c) = (a >< b) <> (a >< c :: Arith Integer)
 -- prop> (a <> b) >< c = (a >< c) <> (b >< c :: Arith Integer)
 --
 -- Absorption of '><' by 'zero':
+--
 -- prop> a >< zero == (zero :: Arith Integer)
 -- prop> zero >< a == (zero :: Arith Integer)
 instance Num r => Semiring (Arith r) where
@@ -93,6 +99,7 @@ instance Num r => Semiring (Arith r) where
 
 -- $
 -- Identity of '><':
+--
 -- prop> one >< a = (a :: Arith Integer)
 -- prop> a >< one = (a :: Arith Integer)
 instance Num r => Unital (Arith r) where

@@ -63,12 +63,14 @@ instance MonadFix Mult where
 
 -- $
 -- Associativity of '<>':
+--
 -- prop> a <> (b <> c) == (a <> b) <> (c :: Mult (Arith Integer))
 instance Semiring r => Semigroup (Mult r) where
   Mult a <> Mult b = Mult (a >< b)
 
 -- $
 -- Identity of '<>':
+--
 -- prop> zero <> a == (a :: Mult (Arith Integer))
 -- prop> a <> zero == (a :: Mult (Arith Integer))
 instance Unital r => Monoid (Mult r) where

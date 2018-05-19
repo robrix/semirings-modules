@@ -50,60 +50,76 @@ class (Semiring r, Semigroup m) => Module r m where
 
 -- $
 -- Left-distributivity of '><<' over '<>':
+--
 -- prop> r ><< (x <> y) == r ><< x <> (r :: Boolean) ><< (y :: ())
 --
 -- Left-distributivity of '<>' over '><<':
+--
 -- prop> (r <> s) ><< x == r ><< x <> (s :: Boolean) ><< (x :: ())
 --
 -- Left-distributivity of '><' over '><<':
+--
 -- prop> (r >< s) ><< x == r ><< ((s :: Boolean) ><< (x :: ()))
 --
 -- Left-identity of '>><':
+--
 -- prop> (one :: Boolean) ><< a == (a :: ())
 instance Semiring r => Module r () where
   _ ><< a = a
 
 -- $
 -- Left-distributivity of '><<' over '<>':
+--
 -- prop> r ><< (x <> y) == r ><< x <> (r :: Boolean) ><< (y :: Boolean)
 --
 -- Left-distributivity of '<>' over '><<':
+--
 -- prop> (r <> s) ><< x == r ><< x <> (s :: Boolean) ><< (x :: Boolean)
 --
 -- Left-distributivity of '><' over '><<':
+--
 -- prop> (r >< s) ><< x == r ><< ((s :: Boolean) ><< (x :: Boolean))
 --
 -- Left-identity of '>><':
+--
 -- prop> (one :: Boolean) ><< a == (a :: Boolean)
 instance Semiring r => Module r r where
   (><<) = (><)
 
 -- $
 -- Left-distributivity of '><<' over '<>':
+--
 -- prop> r ><< (x <> y) == r ><< x <> (r :: Boolean) ><< (y :: (Boolean, Boolean))
 --
 -- Left-distributivity of '<>' over '><<':
+--
 -- prop> (r <> s) ><< x == r ><< x <> (s :: Boolean) ><< (x :: (Boolean, Boolean))
 --
 -- Left-distributivity of '><' over '><<':
+--
 -- prop> (r >< s) ><< x == r ><< ((s :: Boolean) ><< (x :: (Boolean, Boolean)))
 --
 -- Left-identity of '>><':
+--
 -- prop> (one :: Boolean) ><< a == (a :: (Boolean, Boolean))
 instance Semiring r => Module r (r, r) where
   a ><< (b1, b2) = (a >< b1, a >< b2)
 
 -- $
 -- Left-distributivity of '><<' over '<>':
+--
 -- prop> r ><< (x <> y) == r ><< x <> (r :: Boolean) ><< (y :: (Boolean, Boolean, Boolean))
 --
 -- Left-distributivity of '<>' over '><<':
+--
 -- prop> (r <> s) ><< x == r ><< x <> (s :: Boolean) ><< (x :: (Boolean, Boolean, Boolean))
 --
 -- Left-distributivity of '><' over '><<':
+--
 -- prop> (r >< s) ><< x == r ><< ((s :: Boolean) ><< (x :: (Boolean, Boolean, Boolean)))
 --
 -- Left-identity of '>><':
+--
 -- prop> (one :: Boolean) ><< a == (a :: (Boolean, Boolean, Boolean))
 instance Semiring r => Module r (r, r, r) where
   a ><< (b1, b2, b3) = (a >< b1, a >< b2, a >< b3)
