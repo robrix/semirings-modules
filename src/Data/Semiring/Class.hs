@@ -9,6 +9,8 @@ module Data.Semiring.Class
 ) where
 
 import Data.Semigroup as Semigroup
+import Data.Hashable
+import qualified Data.HashSet as HashSet
 import qualified Data.IntMap as IntMap
 import qualified Data.IntSet as IntSet
 import qualified Data.Map as Map
@@ -274,9 +276,37 @@ instance Ord a => Semiring (Set.Set a) where
   (><) = Set.intersection
 
 
+-- unordered-containers
+
+-- $
+-- Associativity of '<>':
+-- prop> a <> (b <> c) == (a <> b) <> (c :: HashSet Char)
+--
+-- Identity of '<>':
+-- prop> zero <> a == (a :: HashSet Char)
+-- prop> a <> zero == (a :: HashSet Char)
+--
+-- Commutativity of '<>':
+-- prop> a >< b = b >< (a :: HashSet Char)
+--
+-- Associativity of '><':
+-- prop> a >< (b >< c) == (a >< b) >< (c :: HashSet Char)
+--
+-- Distributivity of '><' over '<>':
+-- prop> a >< (b <> c) = (a >< b) <> (a >< c :: HashSet Char)
+-- prop> (a <> b) >< c = (a >< c) <> (b >< c :: HashSet Char)
+--
+-- Absorption of '><' by 'zero':
+-- prop> a >< zero == (zero :: HashSet Char)
+-- prop> zero >< a == (zero :: HashSet Char)
+instance (Eq a, Hashable a) => Semiring (HashSet.HashSet a) where
+  (><) = HashSet.intersection
+
+
 -- $setup
 -- >>> import Test.QuickCheck (Arbitrary(..))
 -- >>> import Test.QuickCheck.Function
+-- >>> import Test.QuickCheck.Instances.UnorderedContainers ()
 -- >>> import Data.Semiring.Arith
 -- >>> instance Arbitrary r => Arbitrary (Arith r) where arbitrary = Arith <$> arbitrary ; shrink (Arith r) = map Arith (shrink r)
 -- >>> :{
