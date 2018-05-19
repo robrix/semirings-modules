@@ -81,7 +81,7 @@ instance Ord r => Monoid (Tropical r) where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b = b >< (a :: Tropical (Set Char))
+-- prop> a >< b == b >< (a :: Tropical (Set Char))
 --
 -- Associativity of '><':
 --
@@ -89,8 +89,8 @@ instance Ord r => Monoid (Tropical r) where
 --
 -- Distributivity of '><' over '<>':
 --
--- prop> a >< (b <> c) = (a >< b) <> (a >< c :: Tropical (Set Char))
--- prop> (a <> b) >< c = (a >< c) <> (b >< c :: Tropical (Set Char))
+-- prop> a >< (b <> c) == (a >< b) <> (a >< c :: Tropical (Set Char))
+-- prop> (a <> b) >< c == (a >< c) <> (b >< c :: Tropical (Set Char))
 --
 -- Absorption of '><' by 'zero':
 --
@@ -103,8 +103,8 @@ instance (Ord r, Semigroup r) => Semiring (Tropical r) where
 -- $
 -- Identity of '><':
 --
--- prop> one >< a = (a :: Tropical (Set Char))
--- prop> a >< one = (a :: Tropical (Set Char))
+-- prop> one >< a == (a :: Tropical (Set Char))
+-- prop> a >< one == (a :: Tropical (Set Char))
 instance (Ord r, Semigroup r) => Unital (Tropical r) where
   one = Infinity
 

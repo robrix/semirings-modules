@@ -44,7 +44,7 @@ instance Monoid Boolean where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b = b >< (a :: Boolean)
+-- prop> a >< b == b >< (a :: Boolean)
 --
 -- Associativity of '><':
 --
@@ -52,8 +52,8 @@ instance Monoid Boolean where
 --
 -- Distributivity of '><' over '<>':
 --
--- prop> a >< (b <> c) = (a >< b) <> (a >< c :: Boolean)
--- prop> (a <> b) >< c = (a >< c) <> (b >< c :: Boolean)
+-- prop> a >< (b <> c) == (a >< b) <> (a >< c :: Boolean)
+-- prop> (a <> b) >< c == (a >< c) <> (b >< c :: Boolean)
 --
 -- Absorption of '><' by 'zero':
 --
@@ -65,8 +65,8 @@ instance Semiring Boolean where
 -- $
 -- Identity of '><':
 --
--- prop> one >< a = (a :: Boolean)
--- prop> a >< one = (a :: Boolean)
+-- prop> one >< a == (a :: Boolean)
+-- prop> a >< one == (a :: Boolean)
 instance Unital Boolean where
   one = Boolean True
 

@@ -98,8 +98,8 @@ class Semiring r => Unital r where
 --
 -- Distributivity of '><' over '<>':
 --
--- prop> a >< (b <> c) = (a >< b) <> (a >< c :: ())
--- prop> (a <> b) >< c = (a >< c) <> (b >< c :: ())
+-- prop> a >< (b <> c) == (a >< b) <> (a >< c :: ())
+-- prop> (a <> b) >< c == (a >< c) <> (b >< c :: ())
 --
 -- Absorption of '><' by 'zero':
 --
@@ -111,8 +111,8 @@ instance Semiring () where
 -- $
 -- Identity of '><':
 --
--- prop> one >< a = (a :: ())
--- prop> a >< one = (a :: ())
+-- prop> one >< a == (a :: ())
+-- prop> a >< one == (a :: ())
 instance Unital () where
   one = ()
 
@@ -144,7 +144,7 @@ instance Semiring b => Semiring (a -> b) where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b = b >< (a :: Dual (Set Char))
+-- prop> a >< b == b >< (a :: Dual (Set Char))
 --
 -- Associativity of '><':
 --
@@ -152,8 +152,8 @@ instance Semiring b => Semiring (a -> b) where
 --
 -- Distributivity of '><' over '<>':
 --
--- prop> a >< (b <> c) = (a >< b) <> (a >< c :: Dual (Set Char))
--- prop> (a <> b) >< c = (a >< c) <> (b >< c :: Dual (Set Char))
+-- prop> a >< (b <> c) == (a >< b) <> (a >< c :: Dual (Set Char))
+-- prop> (a <> b) >< c == (a >< c) <> (b >< c :: Dual (Set Char))
 --
 -- Absorption of '><' by 'zero':
 --
@@ -165,8 +165,8 @@ instance Semiring r => Semiring (Dual r) where
 -- $
 -- Identity of '><':
 --
--- prop> one >< a = (a :: Dual (Arith Integer))
--- prop> a >< one = (a :: Dual (Arith Integer))
+-- prop> one >< a == (a :: Dual (Arith Integer))
+-- prop> a >< one == (a :: Dual (Arith Integer))
 instance Unital r => Unital (Dual r) where
   one = Dual one
 
@@ -176,7 +176,7 @@ instance Unital r => Unital (Dual r) where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b = b >< (a :: IntMap ())
+-- prop> a >< b == b >< (a :: IntMap ())
 --
 -- Associativity of '><':
 --
@@ -184,8 +184,8 @@ instance Unital r => Unital (Dual r) where
 --
 -- Distributivity of '><' over '<>':
 --
--- prop> a >< (b <> c) = (a >< b) <> (a >< c :: IntMap ())
--- prop> (a <> b) >< c = (a >< c) <> (b >< c :: IntMap ())
+-- prop> a >< (b <> c) == (a >< b) <> (a >< c :: IntMap ())
+-- prop> (a <> b) >< c == (a >< c) <> (b >< c :: IntMap ())
 --
 -- Absorption of '><' by 'zero':
 --
@@ -197,7 +197,7 @@ instance Semiring (IntMap.IntMap a) where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b = b >< (a :: IntSet)
+-- prop> a >< b == b >< (a :: IntSet)
 --
 -- Associativity of '><':
 --
@@ -205,8 +205,8 @@ instance Semiring (IntMap.IntMap a) where
 --
 -- Distributivity of '><' over '<>':
 --
--- prop> a >< (b <> c) = (a >< b) <> (a >< c :: IntSet)
--- prop> (a <> b) >< c = (a >< c) <> (b >< c :: IntSet)
+-- prop> a >< (b <> c) == (a >< b) <> (a >< c :: IntSet)
+-- prop> (a <> b) >< c == (a >< c) <> (b >< c :: IntSet)
 --
 -- Absorption of '><' by 'zero':
 --
@@ -218,7 +218,7 @@ instance Semiring IntSet.IntSet where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b = b >< (a :: Map Char ())
+-- prop> a >< b == b >< (a :: Map Char ())
 --
 -- Associativity of '><':
 --
@@ -226,8 +226,8 @@ instance Semiring IntSet.IntSet where
 --
 -- Distributivity of '><' over '<>':
 --
--- prop> a >< (b <> c) = (a >< b) <> (a >< c :: Map Char ())
--- prop> (a <> b) >< c = (a >< c) <> (b >< c :: Map Char ())
+-- prop> a >< (b <> c) == (a >< b) <> (a >< c :: Map Char ())
+-- prop> (a <> b) >< c == (a >< c) <> (b >< c :: Map Char ())
 --
 -- Absorption of '><' by 'zero':
 --
@@ -239,7 +239,7 @@ instance Ord k => Semiring (Map.Map k v) where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b = b >< (a :: Set Char)
+-- prop> a >< b == b >< (a :: Set Char)
 --
 -- Associativity of '><':
 --
@@ -247,8 +247,8 @@ instance Ord k => Semiring (Map.Map k v) where
 --
 -- Distributivity of '><' over '<>':
 --
--- prop> a >< (b <> c) = (a >< b) <> (a >< c :: Set Char)
--- prop> (a <> b) >< c = (a >< c) <> (b >< c :: Set Char)
+-- prop> a >< (b <> c) == (a >< b) <> (a >< c :: Set Char)
+-- prop> (a <> b) >< c == (a >< c) <> (b >< c :: Set Char)
 --
 -- Absorption of '><' by 'zero':
 --
@@ -263,7 +263,7 @@ instance Ord a => Semiring (Set.Set a) where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b = b >< (a :: HashMap Char)
+-- prop> a >< b == b >< (a :: HashMap Char)
 --
 -- Associativity of '><':
 --
@@ -271,8 +271,8 @@ instance Ord a => Semiring (Set.Set a) where
 --
 -- Distributivity of '><' over '<>':
 --
--- prop> a >< (b <> c) = (a >< b) <> (a >< c :: HashMap Char)
--- prop> (a <> b) >< c = (a >< c) <> (b >< c :: HashMap Char)
+-- prop> a >< (b <> c) == (a >< b) <> (a >< c :: HashMap Char)
+-- prop> (a <> b) >< c == (a >< c) <> (b >< c :: HashMap Char)
 --
 -- Absorption of '><' by 'zero':
 --
@@ -284,7 +284,7 @@ instance (Eq k, Hashable k) => Semiring (HashMap.HashMap k v) where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b = b >< (a :: HashSet Char)
+-- prop> a >< b == b >< (a :: HashSet Char)
 --
 -- Associativity of '><':
 --
@@ -292,8 +292,8 @@ instance (Eq k, Hashable k) => Semiring (HashMap.HashMap k v) where
 --
 -- Distributivity of '><' over '<>':
 --
--- prop> a >< (b <> c) = (a >< b) <> (a >< c :: HashSet Char)
--- prop> (a <> b) >< c = (a >< c) <> (b >< c :: HashSet Char)
+-- prop> a >< (b <> c) == (a >< b) <> (a >< c :: HashSet Char)
+-- prop> (a <> b) >< c == (a >< c) <> (b >< c :: HashSet Char)
 --
 -- Absorption of '><' by 'zero':
 --

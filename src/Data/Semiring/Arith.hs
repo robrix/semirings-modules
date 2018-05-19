@@ -79,7 +79,7 @@ instance Num r => Monoid (Arith r) where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b = b >< (a :: Arith Integer)
+-- prop> a >< b == b >< (a :: Arith Integer)
 --
 -- Associativity of '><':
 --
@@ -87,8 +87,8 @@ instance Num r => Monoid (Arith r) where
 --
 -- Distributivity of '><' over '<>':
 --
--- prop> a >< (b <> c) = (a >< b) <> (a >< c :: Arith Integer)
--- prop> (a <> b) >< c = (a >< c) <> (b >< c :: Arith Integer)
+-- prop> a >< (b <> c) == (a >< b) <> (a >< c :: Arith Integer)
+-- prop> (a <> b) >< c == (a >< c) <> (b >< c :: Arith Integer)
 --
 -- Absorption of '><' by 'zero':
 --
@@ -100,8 +100,8 @@ instance Num r => Semiring (Arith r) where
 -- $
 -- Identity of '><':
 --
--- prop> one >< a = (a :: Arith Integer)
--- prop> a >< one = (a :: Arith Integer)
+-- prop> one >< a == (a :: Arith Integer)
+-- prop> a >< one == (a :: Arith Integer)
 instance Num r => Unital (Arith r) where
   one = 1
 
