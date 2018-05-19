@@ -1,6 +1,10 @@
 {-# LANGUAGE DeriveDataTypeable, DeriveGeneric #-}
 -- | Semigroup under @'alignWith' ('mergeThese' ('<>'))@.
-module Data.Semiring.Aligned where
+module Data.Semiring.Aligned
+(
+-- * 'Semiring' from 'Align' & 'Applicative'
+  Aligned(..)
+) where
 
 import Control.Applicative (Alternative(..), Applicative(..))
 import Control.Monad.Fix (MonadFix(..))
