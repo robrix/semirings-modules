@@ -38,7 +38,11 @@ import Data.Semiring.Class (Semiring(..))
 --   (r '><' s) '><<' x = r '><<' (s '><<' x)
 -- @
 --
---   Left-identity of '><<', if @r@ is 'Unital'.
+--   Left-identity of '><<', if @r@ is 'Unital':
+--
+-- @
+--   one ><< a = a
+-- @
 class (Semiring r, Semigroup m) => Module r m where
   infixl 7 ><<
   (><<) :: r -> m -> m
