@@ -21,7 +21,7 @@ instance Traversable Zip where
 
 instance Applicative Zip where
   pure = Zip . pure
-  Zip f <*> Zip a = Zip (f <*> a)
+  Zip f <*> Zip a = Zip (zipWith ($) f a)
 
 instance Align Zip where
   nil = Zip nil
