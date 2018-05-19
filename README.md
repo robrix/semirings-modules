@@ -19,6 +19,11 @@ In this presentation, `Semiring`s are not required to have additive or multiplic
 
 The relationship between `zero` and `><` can be useful for expressing values representing the success/failure of some set of operations, where failure of one operation implies failure of the overall set. This can be seen in the `Semiring` instance for `Maybe`, for which a `Nothing` value on either side results in a `Nothing`.
 
+
+## Modules
+
+R-modules over some semiring R generalize the notion of vector spaces over a field. As such, they are well suited to describe collections of or functions producing values in a semiring. A module’s operator, pronounced “scalar multiplication” and written here as `><<`, generalizes scaling a vector.
+
 ----
 
 - [Read the docs][docs].
