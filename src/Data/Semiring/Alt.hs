@@ -13,3 +13,6 @@ instance Foldable f => Foldable (Alt f) where
 
 instance Functor f => Functor (Alt f) where
   fmap f = Alt . fmap f . getAlt
+
+instance Traversable f => Traversable (Alt f) where
+  traverse f = fmap Alt . traverse f . getAlt
