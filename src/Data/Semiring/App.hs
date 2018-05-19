@@ -5,6 +5,7 @@ import Control.Applicative (Alternative(..), Applicative(..))
 import Control.Monad.Fix (MonadFix(..))
 import Data.Data (Data)
 import Data.Ix (Ix)
+import Data.Semiring.Class (zero)
 import GHC.Generics (Generic, Generic1)
 
 newtype App f a = App { getApp :: f a }
@@ -47,11 +48,10 @@ instance (Applicative f, Semigroup a) => Semigroup (App f a) where
 -- prop> zero <> a == (a :: App [] Boolean)
 -- prop> a <> zero == (a :: App [] Boolean)
 instance (Applicative f, Monoid a) => Monoid (App f a) where
-  mempty = App (pure mempty)
+  mempty = App (pure zero)
 
 
 -- $setup
 -- >>> import Test.QuickCheck (Arbitrary(..))
 -- >>> import Data.Semiring.Boolean (Boolean(..))
--- >>> import Data.Semiring.Class (zero)
 -- >>> instance Arbitrary (f a) => Arbitrary (App f a) where arbitrary = App <$> arbitrary ; shrink (App f) = map App (shrink f)
