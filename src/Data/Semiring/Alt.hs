@@ -16,3 +16,7 @@ instance Functor f => Functor (Alt f) where
 
 instance Traversable f => Traversable (Alt f) where
   traverse f = fmap Alt . traverse f . getAlt
+
+instance Applicative f => Applicative (Alt f) where
+  pure = Alt . pure
+  Alt f <*> Alt a = Alt (f <*> a)
