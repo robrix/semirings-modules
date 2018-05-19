@@ -8,12 +8,14 @@ module Data.Semiring.Class
 , Unital(..)
 ) where
 
+import Control.Applicative (Alternative(..))
 import Data.Hashable
 import qualified Data.HashMap.Lazy as HashMap
 import qualified Data.HashSet as HashSet
 import qualified Data.IntMap as IntMap
 import qualified Data.IntSet as IntSet
 import qualified Data.Map as Map
+import Data.Monoid (Alt(..))
 import Data.Semigroup as Semigroup
 import qualified Data.Set as Set
 
@@ -90,7 +92,7 @@ class Semiring r => Unital r where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b = b >< (a :: ())
+-- prop> a <> b = b <> (a :: ())
 --
 -- Associativity of '><':
 --
@@ -120,7 +122,7 @@ instance Unital () where
 -- $
 -- Commutativity of '<>':
 --
--- prop> \ (Fn a) (Fn b) -> a >< b ~= b >< (a :: Int -> Set Char)
+-- prop> \ (Fn a) (Fn b) -> a <> b ~= b <> (a :: Int -> Set Char)
 --
 -- Associativity of '><':
 --
@@ -144,7 +146,7 @@ instance Semiring b => Semiring (a -> b) where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b == b >< (a :: Dual (Set Char))
+-- prop> a <> b == b <> (a :: Dual (Set Char))
 --
 -- Associativity of '><':
 --
@@ -176,7 +178,7 @@ instance Unital r => Unital (Dual r) where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b == b >< (a :: IntMap ())
+-- prop> a <> b == b <> (a :: IntMap ())
 --
 -- Associativity of '><':
 --
@@ -197,7 +199,7 @@ instance Semiring (IntMap.IntMap a) where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b == b >< (a :: IntSet)
+-- prop> a <> b == b <> (a :: IntSet)
 --
 -- Associativity of '><':
 --
@@ -218,7 +220,7 @@ instance Semiring IntSet.IntSet where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b == b >< (a :: Map Char ())
+-- prop> a <> b == b <> (a :: Map Char ())
 --
 -- Associativity of '><':
 --
@@ -239,7 +241,7 @@ instance Ord k => Semiring (Map.Map k v) where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b == b >< (a :: Set Char)
+-- prop> a <> b == b <> (a :: Set Char)
 --
 -- Associativity of '><':
 --
@@ -263,7 +265,7 @@ instance Ord a => Semiring (Set.Set a) where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b == b >< (a :: HashMap Char)
+-- prop> a <> b == b <> (a :: HashMap Char)
 --
 -- Associativity of '><':
 --
@@ -284,7 +286,7 @@ instance (Eq k, Hashable k) => Semiring (HashMap.HashMap k v) where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b == b >< (a :: HashSet Char)
+-- prop> a <> b == b <> (a :: HashSet Char)
 --
 -- Associativity of '><':
 --

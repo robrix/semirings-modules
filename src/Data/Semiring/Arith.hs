@@ -79,7 +79,7 @@ instance Num r => Monoid (Arith r) where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b == b >< (a :: Arith Integer)
+-- prop> a <> b == b <> (a :: Arith Integer)
 --
 -- Associativity of '><':
 --

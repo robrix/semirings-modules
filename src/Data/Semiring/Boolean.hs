@@ -44,7 +44,7 @@ instance Monoid Boolean where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b == b >< (a :: Boolean)
+-- prop> a <> b == b <> (a :: Boolean)
 --
 -- Associativity of '><':
 --

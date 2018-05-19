@@ -82,7 +82,7 @@ instance Ord r => Monoid (Tropical r) where
 --
 -- Commutativity of '<>':
 --
--- prop> a >< b == b >< (a :: Tropical (Arith Integer))
+-- prop> a <> b == b <> (a :: Tropical (Arith Integer))
 --
 -- Associativity of '><':
 --
