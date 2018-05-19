@@ -2,6 +2,7 @@
 module Data.Semiring.Alt where
 
 import Control.Applicative (Alternative(..))
+import Control.Monad.Fix (MonadFix(..))
 import Data.Data (Data)
 import Data.Ix (Ix)
 import GHC.Generics (Generic, Generic1)
@@ -28,3 +29,6 @@ instance Alternative f => Alternative (Alt f) where
 
 instance Monad f => Monad (Alt f) where
   Alt a >>= f = Alt (a >>= getAlt . f)
+
+instance MonadFix f => MonadFix (Alt f) where
+  mfix f = Alt (mfix (getAlt . f))
