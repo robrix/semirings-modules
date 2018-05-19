@@ -61,3 +61,9 @@ instance Semiring Boolean where
 -- prop> a >< one = (a :: Boolean)
 instance Unital Boolean where
   one = Boolean True
+
+
+-- $setup
+-- >>> import Test.QuickCheck (Arbitrary(..))
+-- >>> import Data.Semiring.Class (zero)
+-- >>> instance Arbitrary Boolean where arbitrary = Boolean <$> arbitrary ; shrink (Boolean b) = map Boolean (shrink b)
