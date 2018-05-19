@@ -1,11 +1,9 @@
 {-# LANGUAGE FlexibleInstances, MultiParamTypeClasses #-}
--- | Left & right R-modules over 'Semiring's.
+-- | R-modules over 'Semiring's.
 module Data.Module.Class
 (
--- * Left R-modules
-  LeftModule(..)
--- * Right R-modules
-, RightModule(..)
+-- * R-modules
+  Module(..)
 ) where
 
 import Data.Semiring.Class (Semiring(..))
@@ -50,7 +48,7 @@ import Data.Semiring.Class (Semiring(..))
 -- @
 --   one ><< a = a
 -- @
-class (Semiring r, Semigroup m) => LeftModule r m where
+class (Semiring r, Semigroup m) => Module r m where
   infixl 7 ><<
   (><<) :: r -> m -> m
 
@@ -71,7 +69,7 @@ class (Semiring r, Semigroup m) => LeftModule r m where
 -- Left-identity of '><<':
 --
 -- prop> (one :: Boolean) ><< a == (a :: ())
-instance Semiring r => LeftModule r () where
+instance Semiring r => Module r () where
   _ ><< a = a
 
 -- $
@@ -90,7 +88,7 @@ instance Semiring r => LeftModule r () where
 -- Left-identity of '><<':
 --
 -- prop> (one :: Boolean) ><< a == (a :: Boolean)
-instance Semiring r => LeftModule r r where
+instance Semiring r => Module r r where
   (><<) = (><)
 
 -- $
@@ -109,7 +107,7 @@ instance Semiring r => LeftModule r r where
 -- Left-identity of '><<':
 --
 -- prop> (one :: Boolean) ><< a == (a :: (Boolean, Boolean))
-instance Semiring r => LeftModule r (r, r) where
+instance Semiring r => Module r (r, r) where
   a ><< (b1, b2) = (a >< b1, a >< b2)
 
 -- $
@@ -128,7 +126,7 @@ instance Semiring r => LeftModule r (r, r) where
 -- Left-identity of '><<':
 --
 -- prop> (one :: Boolean) ><< a == (a :: (Boolean, Boolean, Boolean))
-instance Semiring r => LeftModule r (r, r, r) where
+instance Semiring r => Module r (r, r, r) where
   a ><< (b1, b2, b3) = (a >< b1, a >< b2, a >< b3)
 
 -- $
@@ -147,129 +145,8 @@ instance Semiring r => LeftModule r (r, r, r) where
 -- Left-identity of '><<':
 --
 -- prop> (one :: Boolean) ><< a ~= (a :: Int -> Boolean)
-instance Semiring r => LeftModule r (a -> r) where
+instance Semiring r => Module r (a -> r) where
   (a ><< b) x = a >< b x
-
-
--- | A right @r@-module over a 'Semiring' @r@.
---
---   Laws:
---
---   Associativity of '<>' (the 'Semigroup' law):
---
--- @
---   a '<>' (b '<>' c) = (a '<>' b) '<>' c
--- @
---
---   Identity of '<>' (the 'Monoid' law, if @m@ is a 'Monoid'):
---
--- @
---   'zero' '<>' a    = a
---   a    '<>' 'zero' = a
--- @
---
---   Right-distributivity of '>><' over @m@ '<>':
---
--- @
---   (x '<>' y) '>><' r = x '>><' r '<>' y '>><' r
--- @
---
---   Right-distributivity of @r@ '<>' over '>><':
---
--- @
---   x '>><' (r '<>' s) = x '>><' r '<>' x '>><' s
--- @
---
---   Right-distributivity of '><' over '>><':
---
--- @
---   x '>><' (r '><' s) = (r '>><' x) '>><' s
--- @
---
---   Right-identity of '>><', if @r@ is 'Unital':
---
--- @
---   a >>< one = a
--- @
-class (Semiring r, Semigroup m) => RightModule r m where
-  infixl 7 >><
-  (>><) :: m -> r -> m
-
--- $
--- Right-distributivity of '>><' over '<>':
---
--- prop> r >>< (x <> y) == r >>< x <> (r :: Boolean) >>< (y :: ())
---
--- Right-distributivity of '<>' over '>><':
---
--- prop> (r <> s) >>< x == r >>< x <> (s :: Boolean) >>< (x :: ())
---
--- Right-distributivity of '><' over '>><':
---
--- prop> (r >< s) >>< x == r >>< ((s :: Boolean) >>< (x :: ()))
---
--- Right-identity of '>><':
---
--- prop> (one :: Boolean) >>< a == (a :: ())
-instance Semiring r => RightModule r () where
-  a >>< _ = a
-
--- $
--- Right-distributivity of '>><' over '<>':
---
--- prop> r >>< (x <> y) == r >>< x <> (r :: Boolean) >>< (y :: Boolean)
---
--- Right-distributivity of '<>' over '>><':
---
--- prop> (r <> s) >>< x == r >>< x <> (s :: Boolean) >>< (x :: Boolean)
---
--- Right-distributivity of '><' over '>><':
---
--- prop> (r >< s) >>< x == r >>< ((s :: Boolean) >>< (x :: Boolean))
---
--- Right-identity of '>><':
---
--- prop> (one :: Boolean) >>< a == (a :: Boolean)
-instance Semiring r => RightModule r r where
-  (>><) = (><)
-
--- $
--- Right-distributivity of '>><' over '<>':
---
--- prop> r >>< (x <> y) == r >>< x <> (r :: Boolean) >>< (y :: (Boolean, Boolean))
---
--- Right-distributivity of '<>' over '>><':
---
--- prop> (r <> s) >>< x == r >>< x <> (s :: Boolean) >>< (x :: (Boolean, Boolean))
---
--- Right-distributivity of '><' over '>><':
---
--- prop> (r >< s) >>< x == r >>< ((s :: Boolean) >>< (x :: (Boolean, Boolean)))
---
--- Right-identity of '>><':
---
--- prop> (one :: Boolean) >>< a == (a :: (Boolean, Boolean))
-instance Semiring r => RightModule r (r, r) where
-  (a1, a2) >>< b = (a1 >< b, a2 >< b)
-
--- $
--- Right-distributivity of '>><' over '<>':
---
--- prop> r >>< (x <> y) == r >>< x <> (r :: Boolean) >>< (y :: (Boolean, Boolean, Boolean))
---
--- Right-distributivity of '<>' over '>><':
---
--- prop> (r <> s) >>< x == r >>< x <> (s :: Boolean) >>< (x :: (Boolean, Boolean, Boolean))
---
--- Right-distributivity of '><' over '>><':
---
--- prop> (r >< s) >>< x == r >>< ((s :: Boolean) >>< (x :: (Boolean, Boolean, Boolean)))
---
--- Right-identity of '>><':
---
--- prop> (one :: Boolean) >>< a == (a :: (Boolean, Boolean, Boolean))
-instance Semiring r => RightModule r (r, r, r) where
-  (a1, a2, a3) >>< b = (a1 >< b, a2 >< b, a3 >< b)
 
 
 -- $setup
