@@ -6,6 +6,7 @@ import Control.Monad.Fix (MonadFix(..))
 import Data.Align (Align(..))
 import Data.Data (Data)
 import Data.Ix (Ix)
+import Data.Semiring.Class (Semiring(..))
 import Data.These (mergeThese)
 import GHC.Generics (Generic, Generic1)
 
@@ -54,6 +55,27 @@ instance (Align f, Semigroup a) => Semigroup (Aligned f a) where
 -- prop> a <> zero == (a :: Aligned Maybe Boolean)
 instance (Align f, Semigroup a) => Monoid (Aligned f a) where
   mempty = nil
+
+-- $
+-- Commutativity of '<>':
+--
+-- prop> a <> b == b <> (a :: Aligned Maybe Boolean)
+--
+-- Associativity of '><':
+--
+-- prop> a >< (b >< c) == (a >< b) >< (c :: Aligned Maybe Boolean)
+--
+-- Distributivity of '><' over '<>':
+--
+-- prop> a >< (b <> c) == (a >< b) <> (a >< c :: Aligned Maybe Boolean)
+-- prop> (a <> b) >< c == (a >< c) <> (b >< c :: Aligned Maybe Boolean)
+--
+-- Absorption of '><' by 'zero':
+--
+-- prop> a >< zero == (zero :: Aligned Maybe Boolean)
+-- prop> zero >< a == (zero :: Aligned Maybe Boolean)
+instance (Align f, Applicative f, Semiring a) => Semiring (Aligned f a) where
+  (><) = liftA2 (><)
 
 
 -- $setup
