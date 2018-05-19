@@ -1,9 +1,11 @@
 {-# LANGUAGE FlexibleInstances, MultiParamTypeClasses #-}
--- | Left R-modules over 'Semiring's.
+-- | Left & right R-modules over 'Semiring's.
 module Data.Module.Class
 (
 -- * Left R-modules
   LeftModule(..)
+-- * Right R-modules
+, RightModule(..)
 ) where
 
 import Data.Semiring.Class (Semiring(..))
@@ -128,6 +130,11 @@ instance Semiring r => LeftModule r (r, r) where
 -- prop> (one :: Boolean) ><< a == (a :: (Boolean, Boolean, Boolean))
 instance Semiring r => LeftModule r (r, r, r) where
   a ><< (b1, b2, b3) = (a >< b1, a >< b2, a >< b3)
+
+
+class (Semiring r, Semigroup m) => RightModule r m where
+  infixl 7 >><
+  (>><) :: m -> r -> m
 
 
 -- $setup
