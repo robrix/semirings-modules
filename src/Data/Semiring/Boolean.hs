@@ -23,3 +23,10 @@ instance Enum Boolean where
   enumFromThen (Boolean a) (Boolean b) = Boolean <$> enumFromThen a b
   enumFromTo (Boolean a) (Boolean b) = Boolean <$> enumFromTo a b
   enumFromThenTo (Boolean a) (Boolean b) (Boolean c) = Boolean <$> enumFromThenTo a b c
+
+
+-- $
+-- Associativity of '<>':
+-- prop> a <> (b <> c) == (a <> b) <> (c :: Boolean)
+instance Semigroup Boolean where
+  Boolean a <> Boolean b = Boolean (a || b)
