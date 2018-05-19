@@ -81,21 +81,21 @@ instance Ord r => Monoid (Tropical r) where
 -- $
 -- Commutativity of '<>':
 --
--- prop> a >< b == b >< (a :: Tropical (Set Char))
+-- prop> a >< b == b >< (a :: Tropical (Arith Integer))
 --
 -- Associativity of '><':
 --
--- prop> a >< (b >< c) == (a >< b) >< (c :: Tropical (Set Char))
+-- prop> a >< (b >< c) == (a >< b) >< (c :: Tropical (Arith Integer))
 --
 -- Distributivity of '><' over '<>':
 --
--- prop> a >< (b <> c) == (a >< b) <> (a >< c :: Tropical (Set Char))
--- prop> (a <> b) >< c == (a >< c) <> (b >< c :: Tropical (Set Char))
+-- prop> a >< (b <> c) == (a >< b) <> (a >< c :: Tropical (Arith Integer))
+-- prop> (a <> b) >< c == (a >< c) <> (b >< c :: Tropical (Arith Integer))
 --
 -- Absorption of '><' by 'zero':
 --
--- prop> a >< zero == (zero :: Tropical (Set Char))
--- prop> zero >< a == (zero :: Tropical (Set Char))
+-- prop> a >< zero == (zero :: Tropical (Arith Integer))
+-- prop> zero >< a == (zero :: Tropical (Arith Integer))
 instance (Ord r, Semigroup r) => Semiring (Tropical r) where
   Finite a >< Finite b = Finite (a <> b)
   _        >< _        = Infinity
@@ -111,5 +111,7 @@ instance (Monoid r, Ord r) => Unital (Tropical r) where
 
 -- $setup
 -- >>> import Test.QuickCheck (Arbitrary(..))
+-- >>> import Data.Semiring.Arith (Arith(..))
 -- >>> import Data.Set (Set)
 -- >>> instance Arbitrary r => Arbitrary (Tropical r) where arbitrary = Finite <$> arbitrary ; shrink (Finite r) = map Finite (shrink r) ; shrink Infinity = []
+-- >>> instance Arbitrary r => Arbitrary (Arith r) where arbitrary = Arith <$> arbitrary ; shrink (Arith r) = map Arith (shrink r)
