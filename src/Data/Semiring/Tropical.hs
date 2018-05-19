@@ -9,7 +9,7 @@ module Data.Semiring.Tropical
 import Control.Applicative (Applicative(..))
 import Data.Data (Data(..))
 import Data.Semigroup (Semigroup(..), stimesIdempotentMonoid)
-import Data.Semiring.Class (Semiring(..), Unital(..))
+import Data.Semiring.Class (Semiring(..), Unital(..), zero)
 import GHC.Generics (Generic, Generic1)
 
 -- | Tropical semirings.
@@ -105,12 +105,11 @@ instance (Ord r, Semigroup r) => Semiring (Tropical r) where
 --
 -- prop> one >< a == (a :: Tropical (Set Char))
 -- prop> a >< one == (a :: Tropical (Set Char))
-instance (Ord r, Semigroup r) => Unital (Tropical r) where
-  one = Infinity
+instance (Monoid r, Ord r) => Unital (Tropical r) where
+  one = Finite zero
 
 
 -- $setup
 -- >>> import Test.QuickCheck (Arbitrary(..))
--- >>> import Data.Semiring.Class (zero)
 -- >>> import Data.Set (Set)
 -- >>> instance Arbitrary r => Arbitrary (Tropical r) where arbitrary = Finite <$> arbitrary ; shrink (Finite r) = map Finite (shrink r) ; shrink Infinity = []
