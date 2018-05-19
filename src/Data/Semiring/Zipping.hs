@@ -29,7 +29,10 @@ instance Align Zipping where
 
 instance Alternative Zipping where
   empty = Zipping empty
-  Zipping a <|> Zipping b = Zipping (a <|> b)
+  Zipping a <|> Zipping b = Zipping (go a b)
+    where go [] bs = bs
+          go as [] = as
+          go (a:as) (_:bs) = a : go as bs
 
 instance Monad Zipping where
   Zipping a >>= f = Zipping (a >>= getZipping . f)
