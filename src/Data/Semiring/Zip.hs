@@ -9,3 +9,6 @@ newtype Zip a = Zip { getZip :: [a] }
 
 instance Foldable Zip where
   foldMap f = foldMap f . getZip
+
+instance Functor Zip where
+  fmap f = Zip . fmap f . getZip
