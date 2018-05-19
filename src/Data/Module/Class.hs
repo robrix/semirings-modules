@@ -70,8 +70,24 @@ class (Semiring r, Semigroup m) => Module r m where
 instance Semiring r => Module r () where
   _ ><< a = a
 
+-- $
+-- Left-distributivity of '><<' over '<>':
+-- prop> r ><< (x <> y) = r ><< x <> (r :: Boolean) ><< (y :: Boolean)
+--
+-- Left-distributivity of '<>' over '><<':
+-- prop> (r <> s) ><< x = r ><< x <> (s :: Boolean) ><< (x :: Boolean)
+--
+-- Left-distributivity of '><' over '><<':
+-- prop> (r >< s) ><< x = r ><< ((s :: Boolean) ><< (x :: Boolean))
+--
+-- Left-identity of '>><':
+-- prop> (one :: Boolean) ><< a == (a :: Boolean)
+instance Semiring r => Module r r where
+  (><<) = (><)
+
 
 -- $setup
 -- >>> import Test.QuickCheck (Arbitrary(..))
 -- >>> import Data.Semiring.Boolean
 -- >>> import Data.Semiring.Class (Unital(..), zero)
+-- >>> instance Arbitrary Boolean where arbitrary = Boolean <$> arbitrary ; shrink (Boolean b) = map Boolean (shrink b)
