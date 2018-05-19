@@ -15,6 +15,15 @@ import GHC.Generics (Generic(..))
 data Few = Zero | One | More
   deriving (Bounded, Data, Enum, Eq, Generic, Ix, Ord, Show)
 
+-- | In addition to satisfying the usual laws, 'Few'’s 'Semigroup' instance is idempotent.
+--
+-- Associativity of '<>':
+--
+-- prop> a <> (b <> c) == (a <> b) <> (c :: Few)
+--
+-- Idempotence of '<>':
+--
+-- prop> a <> a == (a :: Few)
 instance Semigroup Few where
   Zero <> b    = b
   a    <> Zero = a
@@ -31,3 +40,7 @@ instance Semiring Few where
 
 instance Unital Few where
   one = One
+
+-- $setup
+-- >>> import Test.QuickCheck (Arbitrary(..), elements)
+-- >>> instance Arbitrary Few where arbitrary = elements [Zero .. More] ; shrink few = case few of Zero -> [] ; One -> [Zero] ; More -> [Zero, One]
