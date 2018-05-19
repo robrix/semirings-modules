@@ -27,7 +27,7 @@ import qualified Data.Set as Set
 --   a '<>' (b '<>' c) = (a '<>' b) '<>' c
 -- @
 --
---   Identity of '<>' (the 'Monoid' law, if @s@ is a 'Monoid'):
+--   Identity of '<>' (the 'Monoid' law, if @r@ is a 'Monoid'):
 --
 -- @
 --   'zero' '<>' a    = a
@@ -53,7 +53,7 @@ import qualified Data.Set as Set
 --   (a '<>' b) '><' c = (a '><' c) '<>' (b '><' c)
 -- @
 --
---   Absorption of '><' by 'zero' (if @s@ is a 'Monoid'):
+--   Absorption of '><' by 'zero' (if @r@ is a 'Monoid'):
 --
 -- @
 --   'zero' '><' a    = 'zero'
