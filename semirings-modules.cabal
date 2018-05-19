@@ -16,6 +16,7 @@ cabal-version:       >=1.10
 library
   exposed-modules:     Data.Module.Class
                      , Data.Semiring
+                     , Data.Semiring.Alt
                      , Data.Semiring.App
                      , Data.Semiring.Arith
                      , Data.Semiring.Boolean
