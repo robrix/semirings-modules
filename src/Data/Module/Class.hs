@@ -132,6 +132,46 @@ instance Semiring r => LeftModule r (r, r, r) where
   a ><< (b1, b2, b3) = (a >< b1, a >< b2, a >< b3)
 
 
+-- | A right @r@-module over a 'Semiring' @r@.
+--
+--   Laws:
+--
+--   Associativity of '<>' (the 'Semigroup' law):
+--
+-- @
+--   a '<>' (b '<>' c) = (a '<>' b) '<>' c
+-- @
+--
+--   Identity of '<>' (the 'Monoid' law, if @m@ is a 'Monoid'):
+--
+-- @
+--   'zero' '<>' a    = a
+--   a    '<>' 'zero' = a
+-- @
+--
+--   Right-distributivity of '>><' over @m@ '<>':
+--
+-- @
+--   (x '<>' y) '>><' r = x '>><' r '<>' y '>><' r
+-- @
+--
+--   Right-distributivity of @r@ '<>' over '>><':
+--
+-- @
+--   x '>><' (r '<>' s) = x '>><' r '<>' x '>><' s
+-- @
+--
+--   Right-distributivity of '><' over '>><':
+--
+-- @
+--   x '>><' (r '><' s) = (r '>><' x) '>><' s
+-- @
+--
+--   Right-identity of '>><', if @r@ is 'Unital':
+--
+-- @
+--   a >>< one = a
+-- @
 class (Semiring r, Semigroup m) => RightModule r m where
   infixl 7 >><
   (>><) :: m -> r -> m
