@@ -3,6 +3,7 @@ module Data.Semiring.Few where
 
 import Data.Data (Data(..))
 import Data.Ix (Ix(..))
+import Data.Semiring.Class (Semiring(..))
 import GHC.Generics (Generic(..))
 
 data Few = Zero | One | More
@@ -15,3 +16,9 @@ instance Semigroup Few where
 
 instance Monoid Few where
   mempty = Zero
+
+instance Semiring Few where
+  Zero ><    _ = Zero
+  _    >< Zero = Zero
+  One  >< One  = One
+  _    >< _    = More
