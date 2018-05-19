@@ -50,7 +50,7 @@ instance (Applicative f, Semigroup a) => Semigroup (App f a) where
 instance (Applicative f, Monoid a) => Monoid (App f a) where
   mempty = pure zero
 
--- | Note that the commutativity of '<>' depends on the commutativity of @f@’s 'liftA2' and @a@’s '<>'.
+-- | Note that 'App'’s adherence to the commutativity and distributivity laws depends on the commutativity of @f@’s 'liftA2' and @a@’s '<>'.
 --
 -- Commutativity of '<>':
 --
