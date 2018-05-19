@@ -5,3 +5,5 @@ import Data.Semiring.Class
 
 class Semiring r => Module r m where
   (><<) :: r -> m -> m
+
+  infixl 7 ><<
