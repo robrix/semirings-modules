@@ -1,4 +1,5 @@
 {-# LANGUAGE DeriveDataTypeable, DeriveGeneric #-}
+-- | 'Semiring's from boolean algebras.
 module Data.Semiring.Boolean
 (
 -- * Boolean algebras
