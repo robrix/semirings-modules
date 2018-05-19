@@ -1,8 +1,8 @@
 {-# LANGUAGE DeriveDataTypeable, DeriveGeneric #-}
--- | The 'Semigroup' from 'Num'’s '+' and '*' operators, @0@, and @1@.
+-- | The 'Semiring' from 'Num'’s '+' and '*' operators, @0@, and @1@.
 module Data.Semiring.Arith
 (
--- * Numeric 'Semigroup's
+-- * Numeric 'Semiring's
   Arith(..)
 ) where
 
@@ -14,7 +14,7 @@ import Data.Ix (Ix(..))
 import Data.Semiring.Class (Semiring(..), Unital(..))
 import GHC.Generics (Generic, Generic1)
 
--- | The 'Semigroup' from 'Num'’s '+' and '*' operators, @0@, and @1@.
+-- | The 'Semiring' from 'Num'’s '+' and '*' operators, @0@, and @1@.
 newtype Arith r = Arith { getArith :: r }
   deriving (Bounded, Data, Eq, Generic, Generic1, Ix, Ord, Read, Show)
 
