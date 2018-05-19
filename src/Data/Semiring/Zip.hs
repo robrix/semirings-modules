@@ -29,3 +29,6 @@ instance Align Zip where
 instance Alternative Zip where
   empty = Zip empty
   Zip a <|> Zip b = Zip (a <|> b)
+
+instance Monad Zip where
+  Zip a >>= f = Zip (a >>= getZip . f)
