@@ -2,6 +2,7 @@
 module Data.Semiring.Zip where
 
 import Control.Applicative (Alternative(..))
+import Control.Monad.Fix (MonadFix(..))
 import Data.Align (Align(..))
 import Data.Data (Data(..))
 import GHC.Generics (Generic, Generic1)
@@ -32,3 +33,6 @@ instance Alternative Zip where
 
 instance Monad Zip where
   Zip a >>= f = Zip (a >>= getZip . f)
+
+instance MonadFix Zip where
+  mfix f = Zip (mfix (getZip . f))
