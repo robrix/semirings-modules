@@ -25,3 +25,6 @@ instance Applicative f => Applicative (Alt f) where
 instance Alternative f => Alternative (Alt f) where
   empty = Alt empty
   Alt a <|> Alt b = Alt (a <|> b)
+
+instance Monad f => Monad (Alt f) where
+  Alt a >>= f = Alt (a >>= getAlt . f)
