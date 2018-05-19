@@ -195,6 +195,26 @@ class (Semiring r, Semigroup m) => RightModule r m where
 instance Semiring r => RightModule r () where
   a >>< _ = a
 
+-- $
+-- Right-distributivity of '>><' over '<>':
+--
+-- prop> r >>< (x <> y) == r >>< x <> (r :: Boolean) >>< (y :: Boolean)
+--
+-- Right-distributivity of '<>' over '>><':
+--
+-- prop> (r <> s) >>< x == r >>< x <> (s :: Boolean) >>< (x :: Boolean)
+--
+-- Right-distributivity of '><' over '>><':
+--
+-- prop> (r >< s) >>< x == r >>< ((s :: Boolean) >>< (x :: Boolean))
+--
+-- Right-identity of '>><':
+--
+-- prop> (one :: Boolean) >>< a == (a :: Boolean)
+instance Semiring r => RightModule r r where
+  (>><) = (><)
+
+
 -- $setup
 -- >>> import Test.QuickCheck (Arbitrary(..))
 -- >>> import Data.Semiring.Boolean
