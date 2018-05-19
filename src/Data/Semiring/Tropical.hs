@@ -78,7 +78,8 @@ instance Ord r => Semigroup (Tropical r) where
 instance Ord r => Monoid (Tropical r) where
   mempty = Infinity
 
--- $
+-- | 'Tropical'’s 'Semiring' instance is defined in terms of 'Semigroup' rather than 'Num' for the sake of convenience and consistency. Note however that collections may violate the distributivity laws.
+--
 -- Commutativity of '<>':
 --
 -- prop> a >< b == b >< (a :: Tropical (Arith Integer))
@@ -91,6 +92,16 @@ instance Ord r => Monoid (Tropical r) where
 --
 -- prop> a >< (b <> c) == (a >< b) <> (a >< c :: Tropical (Arith Integer))
 -- prop> (a <> b) >< c == (a >< c) <> (b >< c :: Tropical (Arith Integer))
+--
+-- Except collections:
+--
+-- >>> let (a, b, c) = (Finite (fromList "a"), Finite (fromList ""), Finite (fromList "A"))
+-- >>> a >< (b <> c) == (a >< b) <> (a >< c)
+-- False
+--
+-- >>> let (a, b, c) = (Finite "a", Finite "", Finite "b")
+-- >>> (a <> b) >< c == (a >< c) <> (b >< c)
+-- False
 --
 -- Absorption of '><' by 'zero':
 --
@@ -112,6 +123,6 @@ instance (Monoid r, Ord r) => Unital (Tropical r) where
 -- $setup
 -- >>> import Test.QuickCheck (Arbitrary(..))
 -- >>> import Data.Semiring.Arith (Arith(..))
--- >>> import Data.Set (Set)
+-- >>> import Data.Set (Set, fromList)
 -- >>> instance Arbitrary r => Arbitrary (Tropical r) where arbitrary = Finite <$> arbitrary ; shrink (Finite r) = map Finite (shrink r) ; shrink Infinity = []
 -- >>> instance Arbitrary r => Arbitrary (Arith r) where arbitrary = Arith <$> arbitrary ; shrink (Arith r) = map Arith (shrink r)
