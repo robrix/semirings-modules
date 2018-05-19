@@ -49,13 +49,6 @@ class (Semiring r, Semigroup m) => Module r m where
 
 
 -- $
--- Associativity of '<>':
--- prop> a <> (b <> c) == (a <> b) <> (c :: ())
---
--- Identity of '<>':
--- prop> zero <> a == (a :: ())
--- prop> a <> zero == (a :: ())
---
 -- Left-distributivity of '><<' over '<>':
 -- prop> r ><< (x <> y) = r ><< x <> (r :: Boolean) ><< (y :: ())
 --
