@@ -2,6 +2,7 @@
 module Data.Semiring.App where
 
 import Control.Applicative (Alternative(..))
+import Control.Monad.Fix (MonadFix(..))
 import Data.Data (Data)
 import Data.Ix (Ix)
 import GHC.Generics (Generic, Generic1)
@@ -28,3 +29,6 @@ instance Alternative f => Alternative (App f) where
 
 instance Monad f => Monad (App f) where
   App a >>= f = App (a >>= getApp . f)
+
+instance MonadFix f => MonadFix (App f) where
+  mfix f = App (mfix (getApp . f))
